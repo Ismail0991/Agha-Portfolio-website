@@ -36,12 +36,16 @@ exports.getBlogBySlug = async (req, res) => {
 exports.createBlog = async (req, res) => {
   const { title, content, excerpt, category, author, image, tags, published } =
     req.body;
-  const slug = title
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
+
+  if (!title || !String(title).trim()) {
+    return res.status(400).json({ message: "Title is required" });
+  }
 
   try {
+    // Generated in the model: it guarantees the slug is non-empty and unique, which the
+    // old inline a-z0-9 rule did not (any non-Latin title produced an empty slug).
+    const slug = await Blog.generateSlug(title);
+
     const blog = new Blog({
       title,
       slug,

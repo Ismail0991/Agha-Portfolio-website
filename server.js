@@ -9,6 +9,7 @@ const { initializeFirebase, verifyFirebaseCredential } = require("./config/datab
 const { initializeCloudinary, verifyCloudinaryCredential } = require("./config/cloudinary");
 const { pageAuth } = require("./middleware/auth");
 const { siteImages } = require("./middleware/siteImages");
+const { startKeepAlive } = require("./config/keepAlive");
 
 const app = express();
 
@@ -25,6 +26,16 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+// Declared before the view engine and the siteImages middleware so a health ping is as
+// cheap as possible: no template render, no Firestore read, no layout wrapping.
+app.get("/health", (req, res) => {
+  res.json({
+    status: "ok",
+    uptime: Math.round(process.uptime()),
+    timestamp: new Date().toISOString(),
+  });
+});
+
 // View engine
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -36,6 +47,21 @@ app.set("layout", "layout");
 
 // Exposes res.locals.siteImages to every view so admin-managed images render server-side.
 app.use(siteImages);
+
+// Responses carried an ETag but no Cache-Control, which leaves caching to the browser's
+// heuristics -- so a back/forward or repeat navigation could reuse a stale response
+// without revalidating, and freshly added blogs or team members would not appear until a
+// manual reload. Say explicitly that this data is never reusable without checking.
+app.use((req, res, next) => {
+  if (req.path.startsWith("/api/")) {
+    res.set("Cache-Control", "no-store, must-revalidate");
+  } else if (req.method === "GET" && !req.path.startsWith("/health")) {
+    // Pages may still be cached, but must revalidate first: the ETag turns the check
+    // into a cheap 304 when nothing changed.
+    res.set("Cache-Control", "no-cache");
+  }
+  next();
+});
 
 // Routes
 const authRoutes = require("./routes/authRoutes");
@@ -134,6 +160,7 @@ const server = app.listen(PORT, () => {
     // Warns rather than exits: static pages still render without a working credential.
     verifyFirebaseCredential();
     verifyCloudinaryCredential();
+    startKeepAlive();
   }, 0);
 });
 

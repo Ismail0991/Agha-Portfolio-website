@@ -10,7 +10,8 @@ services:
     plan: free
     buildCommand: npm install
     startCommand: npm start
-    healthCheckPath: /
+    # Cheap endpoint: no template render and no Firestore read, unlike /.
+    healthCheckPath: /health
     envVars:
       - key: NODE_ENV
         value: production
@@ -38,3 +39,11 @@ services:
       # fresh database, then set it back.
       - key: ALLOW_ADMIN_REGISTRATION
         value: "false"
+
+      # Self-ping to resist the free tier's ~15 min idle shutdown. RENDER_EXTERNAL_URL is
+      # injected by Render, so no URL is needed here. This cannot wake a stopped instance --
+      # pair it with an external uptime monitor hitting /health for that.
+      - key: KEEP_ALIVE
+        value: "true"
+      - key: KEEP_ALIVE_MINUTES
+        value: "5"

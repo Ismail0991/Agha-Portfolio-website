@@ -12,6 +12,20 @@ const toMillis = (value) => {
   return Number.isNaN(parsed) ? 0 : parsed;
 };
 
+// The old rule was /[^a-z0-9]+/ -> "-", which erased every non-Latin script: an Urdu or
+// Arabic title collapsed to an empty slug, the post linked to "/blog/", and that URL
+// matched the blog LIST route instead, so the post was simply unreachable.
+// \p{L}/\p{N} keep letters and digits from any script; the browser percent-encodes them.
+// \p{M} keeps combining marks, without which Urdu/Hindi vowel signs are stripped out of
+// the middle of words (नमस्ते would become नमस-त).
+const slugify = (title) =>
+  String(title == null ? "" : title)
+    .trim()
+    .toLowerCase()
+    .replace(/['’]/g, "")
+    .replace(/[^\p{L}\p{N}\p{M}]+/gu, "-")
+    .replace(/^-+|-+$/g, "");
+
 class Blog {
   constructor(data) {
     this.id = data.id || null;
@@ -48,6 +62,20 @@ class Blog {
       this.id = docRef.id;
     }
     return this;
+  }
+
+  // A slug must be non-empty (an empty one resolves to the blog list, hiding the post)
+  // and unique (findBySlug takes the first match, so a duplicate makes the older post
+  // unreachable). Falls back to a time-based id when a title has no letters or digits
+  // at all -- e.g. a title of only punctuation or emoji.
+  static async generateSlug(title) {
+    const base = slugify(title) || `post-${Date.now().toString(36)}`;
+
+    let candidate = base;
+    for (let n = 2; await Blog.findBySlug(candidate); n += 1) {
+      candidate = `${base}-${n}`;
+    }
+    return candidate;
   }
 
   static async findBySlug(slug) {
