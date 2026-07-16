@@ -1,0 +1,258 @@
+<style>
+  /* Hand-rolled dark "prose" — the Tailwind CDN build ships no typography plugin. */
+  .post-body { color: #b8b8c0; font-size: 1.05rem; line-height: 1.85; }
+  .post-body > * + * { margin-top: 1.35em; }
+  .post-body h2, .post-body h3, .post-body h4 { color: #fff; font-weight: 700; line-height: 1.3; }
+  .post-body h2 { font-size: 1.7rem; margin-top: 2.4em; }
+  .post-body h3 { font-size: 1.3rem; margin-top: 2em; }
+  .post-body h4 { font-size: 1.1rem; margin-top: 1.8em; }
+  .post-body a { color: #f87171; text-decoration: underline; text-underline-offset: 3px; }
+  .post-body a:hover { color: #fca5a5; }
+  .post-body strong { color: #fff; font-weight: 600; }
+  .post-body em { color: #d4d4d8; }
+  .post-body ul, .post-body ol { padding-left: 1.4em; }
+  .post-body ul { list-style: disc; }
+  .post-body ol { list-style: decimal; }
+  .post-body li { margin-top: 0.5em; }
+  .post-body li::marker { color: #ef4444; }
+  .post-body blockquote {
+    border-left: 3px solid #ef4444;
+    padding: 0.2em 0 0.2em 1.25em;
+    color: #d4d4d8;
+    font-style: italic;
+  }
+  .post-body code {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 0.35rem;
+    padding: 0.15em 0.4em;
+    font-size: 0.875em;
+    color: #fca5a5;
+  }
+  .post-body pre {
+    background: #0d0d14;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 0.75rem;
+    padding: 1.15rem 1.25rem;
+    overflow-x: auto;
+  }
+  .post-body pre code { background: none; border: 0; padding: 0; color: #e7e7ea; }
+  .post-body img { border-radius: 0.75rem; max-width: 100%; height: auto; }
+  .post-body hr { border-color: rgba(255, 255, 255, 0.1); margin: 2.5em 0; }
+  .post-body table { width: 100%; border-collapse: collapse; font-size: 0.95em; }
+  .post-body th, .post-body td { border: 1px solid rgba(255, 255, 255, 0.1); padding: 0.6rem 0.8rem; text-align: left; }
+  .post-body th { color: #fff; background: rgba(255, 255, 255, 0.03); }
+</style>
+
+<!-- ============================ ARTICLE ============================ -->
+<article class="relative overflow-hidden">
+  <div class="absolute inset-x-0 top-0 h-[32rem] grid-bg pointer-events-none"></div>
+
+  <div class="relative max-w-3xl mx-auto px-4 pt-16 pb-20 lg:pt-20">
+    <nav class="mb-10 reveal" aria-label="Breadcrumb">
+      <a href="/blog" class="text-sm text-gray-500 hover:text-brand transition inline-flex items-center gap-2">
+        <i class="fas fa-arrow-left text-xs"></i> Back to all posts
+      </a>
+    </nav>
+
+    <div id="blogContent" class="reveal">
+      <div class="animate-pulse">
+        <div class="h-4 bg-white/10 rounded w-1/4 mb-6"></div>
+        <div class="h-10 bg-white/10 rounded w-5/6 mb-4"></div>
+        <div class="h-10 bg-white/10 rounded w-2/3 mb-8"></div>
+        <div class="h-72 bg-white/5 rounded-2xl mb-8"></div>
+        <div class="h-3 bg-white/5 rounded w-full mb-3"></div>
+        <div class="h-3 bg-white/5 rounded w-full mb-3"></div>
+        <div class="h-3 bg-white/5 rounded w-4/5"></div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ======================= RELATED ARTICLES ======================= -->
+<section class="py-24 border-t border-white/10 bg-white/[0.02]">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex flex-wrap justify-between items-end gap-4 mb-14 reveal">
+      <div class="max-w-xl">
+        <div class="eyebrow mb-4">Keep Reading</div>
+        <h2 class="text-3xl sm:text-4xl font-bold mb-3">
+          Related <span class="gradient-text">articles</span>
+        </h2>
+        <p class="text-gray-400">More from the same corner of our work.</p>
+      </div>
+      <a href="/blog" class="ghost-btn !py-2.5 !px-5 text-sm">
+        View All Posts <i class="fas fa-arrow-right text-xs"></i>
+      </a>
+    </div>
+
+    <div id="relatedBlogs" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="glass p-7 animate-pulse"><div class="h-4 bg-white/10 rounded w-1/3 mb-4"></div><div class="h-5 bg-white/10 rounded w-3/4 mb-3"></div><div class="h-3 bg-white/5 rounded w-full"></div></div>
+      <div class="glass p-7 animate-pulse"><div class="h-4 bg-white/10 rounded w-1/3 mb-4"></div><div class="h-5 bg-white/10 rounded w-3/4 mb-3"></div><div class="h-3 bg-white/5 rounded w-full"></div></div>
+      <div class="glass p-7 animate-pulse"><div class="h-4 bg-white/10 rounded w-1/3 mb-4"></div><div class="h-5 bg-white/10 rounded w-3/4 mb-3"></div><div class="h-3 bg-white/5 rounded w-full"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== CTA ============================== -->
+<section class="py-24">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-ink-700 to-ink-900 px-8 py-16 sm:px-16 sm:py-20 text-center reveal">
+      <div class="absolute inset-0 grid-bg opacity-60 pointer-events-none"></div>
+      <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[36rem] h-[36rem] bg-brand/20 blur-[100px] rounded-full pointer-events-none"></div>
+
+      <div class="relative">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-5">
+          Let's Build Something Great <span class="gradient-text">Together</span>
+        </h2>
+        <p class="text-gray-400 max-w-xl mx-auto mb-10 leading-relaxed">
+          Liked what you read? Tell us about your project and we'll come back within
+          24 hours with honest thoughts on it.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href="/contact" class="primary-btn">
+            Get Started Today <i class="fas fa-arrow-right text-xs"></i>
+          </a>
+          <a href="/services" class="ghost-btn">See What We Do</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const slug = "<%= slug %>";
+    const content = document.getElementById("blogContent");
+    const relatedWrap = document.getElementById("relatedBlogs");
+
+    // API data lands in innerHTML, so escape it. The one exception is blog.content,
+    // which is admin-authored rich HTML and is meant to render as markup.
+    const escape = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+    const FALLBACK_IMG = "<%= siteImages['blog.fallback'] %>";
+
+    const fmtDate = (d) =>
+      d ? new Date(d).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "";
+
+    fetch(`/api/blogs/${encodeURIComponent(slug)}`)
+      .then((res) => (res.ok ? res.json() : Promise.reject(new Error(res.status))))
+      .then((blog) => {
+        const img = blog.image || FALLBACK_IMG;
+        const tags = (blog.tags || [])
+          .map((t) => String(t).trim())
+          .filter(Boolean);
+
+        content.innerHTML = `
+          <header class="mb-10">
+            <div class="flex flex-wrap items-center gap-3 mb-5">
+              <span class="eyebrow">${escape(blog.category || "General")}</span>
+              <span class="text-xs text-gray-600">${escape(fmtDate(blog.createdAt))}</span>
+            </div>
+
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.12] mb-6">${escape(blog.title)}</h1>
+
+            ${blog.excerpt ? `<p class="text-lg text-gray-400 leading-relaxed">${escape(blog.excerpt)}</p>` : ""}
+
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-3 mt-8 pt-6 border-t border-white/10 text-sm text-gray-500">
+              <span class="inline-flex items-center gap-2.5">
+                <span class="grid place-items-center w-9 h-9 rounded-full bg-brand/15 border border-brand/30 text-brand text-xs font-semibold">
+                  ${escape(String(blog.author || "Admin").trim().charAt(0).toUpperCase())}
+                </span>
+                <span class="text-gray-300 font-medium">${escape(blog.author || "Admin")}</span>
+              </span>
+              <span class="inline-flex items-center gap-2"><i class="fas fa-calendar text-xs"></i> ${escape(fmtDate(blog.createdAt))}</span>
+              <span class="inline-flex items-center gap-2"><i class="fas fa-eye text-xs"></i> ${escape(blog.views || 0)} views</span>
+            </div>
+          </header>
+
+          <figure class="relative mb-12">
+            <div class="absolute -inset-3 bg-brand/10 blur-3xl rounded-full pointer-events-none"></div>
+            <div class="relative glass p-2 !rounded-2xl">
+              <img src="${escape(img)}" alt="${escape(blog.title)}"
+                   class="rounded-xl w-full h-64 sm:h-96 object-cover">
+            </div>
+          </figure>
+
+          <div class="post-body">${blog.content || ""}</div>
+
+          ${tags.length ? `
+            <div class="flex flex-wrap items-center gap-2 mt-12 pt-8 border-t border-white/10">
+              <span class="text-xs uppercase tracking-[0.2em] text-gray-600 mr-2">Tags</span>
+              ${tags.map((t) => `<span class="px-3 py-1 rounded-full text-xs bg-white/[0.04] border border-white/10 text-gray-400">${escape(t)}</span>`).join("")}
+            </div>` : ""}
+
+          <div class="glass p-7 mt-12 flex flex-wrap items-center justify-between gap-5">
+            <div>
+              <p class="font-semibold mb-1">Enjoyed this post?</p>
+              <p class="text-sm text-gray-500">Share it, or come tell us what you're building.</p>
+            </div>
+            <a href="/contact" class="primary-btn !py-2.5 !px-5 text-sm">
+              Get in Touch <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+          </div>`;
+      })
+      .catch((err) => {
+        console.error("Error loading blog post:", err);
+        content.innerHTML = `
+          <div class="glass p-12 text-center">
+            <i class="fas fa-file-circle-question text-4xl text-gray-700 mb-5"></i>
+            <h1 class="text-2xl font-bold mb-3">Post not found</h1>
+            <p class="text-gray-500 mb-8 max-w-sm mx-auto">
+              This article may have been moved or unpublished. Try browsing everything we've written instead.
+            </p>
+            <a href="/blog" class="primary-btn">
+              <i class="fas fa-arrow-left text-xs"></i> Back to Blog
+            </a>
+          </div>`;
+      });
+
+    // Related posts: same category, current post excluded.
+    fetch("/api/blogs")
+      .then((res) => (res.ok ? res.json() : Promise.reject(new Error(res.status))))
+      .then((blogs) => {
+        const current = blogs.find((b) => b.slug === slug);
+        let related = blogs.filter((b) => b.slug !== slug && current && b.category === current.category);
+
+        // Rather than show nothing, fall back to any other recent posts.
+        if (!related.length) related = blogs.filter((b) => b.slug !== slug);
+        related = related.slice(0, 3);
+
+        if (!related.length) {
+          relatedWrap.innerHTML =
+            '<div class="glass p-10 text-center md:col-span-3">' +
+            '<i class="fas fa-feather text-3xl text-gray-700 mb-3"></i>' +
+            '<p class="text-gray-500">No other posts yet — check back soon.</p></div>';
+          return;
+        }
+
+        relatedWrap.innerHTML = related.map((blog) => {
+          const date = blog.createdAt
+            ? new Date(blog.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+            : "";
+          const img = blog.image || FALLBACK_IMG;
+          return `
+            <a href="/blog/${encodeURIComponent(blog.slug)}" class="glass overflow-hidden group block">
+              <div class="h-44 overflow-hidden">
+                <img src="${escape(img)}" alt="${escape(blog.title)}" loading="lazy"
+                     class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              </div>
+              <div class="p-6">
+                <div class="flex items-center gap-3 text-xs text-gray-500 mb-3">
+                  ${blog.category ? `<span class="px-2.5 py-1 rounded-full bg-brand/10 border border-brand/25 text-brand font-medium">${escape(blog.category)}</span>` : ""}
+                  <span>${escape(date)}</span>
+                </div>
+                <h3 class="font-bold mb-2 group-hover:text-brand transition line-clamp-2">${escape(blog.title)}</h3>
+                <p class="text-sm text-gray-400 leading-relaxed line-clamp-2">${escape(blog.excerpt || "")}</p>
+              </div>
+            </a>`;
+        }).join("");
+      })
+      .catch((err) => {
+        console.error("Error loading related blogs:", err);
+        relatedWrap.innerHTML =
+          '<div class="glass p-10 text-center md:col-span-3">' +
+          '<p class="text-gray-500">Related posts are unavailable right now.</p></div>';
+      });
+  })();
+</script>

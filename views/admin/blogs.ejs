@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Blogs - DigitalHub Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: { 900: "#07070b", 800: "#0d0d14", 700: "#14141d", 600: "#1c1c28" },
+            brand: { DEFAULT: "#ef4444", dark: "#dc2626", light: "#f87171" },
+          },
+          fontFamily: {
+            display: ["Sora", "system-ui", "sans-serif"],
+            sans: ["Inter", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    :root {
+      --primary: #ef4444;
+      --primary-dark: #dc2626;
+      --ink: #07070b;
+      --surface: rgba(255, 255, 255, 0.035);
+      --border: rgba(255, 255, 255, 0.09);
+    }
+
+    body {
+      background: var(--ink);
+      color: #e7e7ea;
+      font-family: "Inter", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 { font-family: "Sora", system-ui, sans-serif; letter-spacing: -0.02em; }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(60rem 40rem at 75% -10%, rgba(239, 68, 68, 0.13), transparent 60%),
+        radial-gradient(45rem 35rem at 5% 15%, rgba(239, 68, 68, 0.06), transparent 55%);
+    }
+    body > * { position: relative; z-index: 1; }
+
+    .primary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: linear-gradient(180deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      padding: 0.8rem 1.6rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 8px 24px -8px rgba(239, 68, 68, 0.65);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+      cursor: pointer;
+    }
+    .primary-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px -8px rgba(239, 68, 68, 0.8);
+      filter: brightness(1.06);
+    }
+
+    .ghost-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.6rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      color: #fff;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      backdrop-filter: blur(8px);
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+      cursor: pointer;
+    }
+    .ghost-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.22);
+      transform: translateY(-2px);
+    }
+
+    .glass {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .service-icon {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-size: 1.15rem;
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.28);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--primary);
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+    }
+
+    .gradient-text {
+      background: linear-gradient(120deg, #fff 15%, var(--primary) 55%, #fca5a5 90%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .field {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 0.7rem;
+      padding: 0.75rem 1rem;
+      color: #fff;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .field::placeholder { color: rgba(255, 255, 255, 0.35); }
+    .field:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    /* --- Admin shell --- */
+    .admin-sidebar {
+      background: rgba(9, 9, 14, 0.75);
+      border-right: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.7rem 0.9rem;
+      border-radius: 0.7rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #9ca3af;
+      border: 1px solid transparent;
+      transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+    .nav-item i { width: 1.1rem; text-align: center; font-size: 0.85rem; }
+    .nav-item:hover { color: #fff; background: rgba(255, 255, 255, 0.05); }
+    .nav-item.active {
+      color: #fff;
+      font-weight: 600;
+      background: rgba(239, 68, 68, 0.12);
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+    .nav-item.active i { color: var(--primary); }
+
+    /* --- Data table --- */
+    .data-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+    .data-table thead th {
+      text-align: left;
+      padding: 0.85rem 1.25rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #6b7280;
+      background: rgba(255, 255, 255, 0.02);
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    .data-table tbody td {
+      padding: 0.9rem 1.25rem;
+      font-size: 0.875rem;
+      color: #9ca3af;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      vertical-align: middle;
+    }
+    .data-table tbody tr { transition: background 0.2s ease; }
+    .data-table tbody tr:hover { background: rgba(255, 255, 255, 0.035); }
+    .data-table tbody tr:last-child td { border-bottom: none; }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .pill-published { background: rgba(34, 197, 94, 0.12); border: 1px solid rgba(34, 197, 94, 0.3); color: #4ade80; }
+    .pill-draft { background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.3); color: #fbbf24; }
+
+    .icon-btn {
+      display: inline-grid;
+      place-items: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 0.5rem;
+      font-size: 0.75rem;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.03);
+      color: #9ca3af;
+      transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      cursor: pointer;
+    }
+    .icon-btn:hover { color: #fff; background: rgba(255, 255, 255, 0.09); border-color: rgba(255, 255, 255, 0.22); }
+    .icon-btn.danger:hover { color: #fff; background: rgba(239, 68, 68, 0.85); border-color: rgba(239, 68, 68, 0.9); }
+
+    ::selection { background: rgba(239, 68, 68, 0.35); }
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: #0b0b12; }
+    ::-webkit-scrollbar-thumb { background: #2a2a38; border-radius: 999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3a3a4d; }
+  </style>
+</head>
+<body class="font-sans">
+  <div class="flex min-h-screen">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar hidden lg:flex lg:flex-col w-64 shrink-0 sticky top-0 h-screen">
+      <div class="p-6 border-b border-white/10">
+        <a href="/" class="flex items-center gap-2.5 text-xl font-bold font-display text-white">
+          <span class="grid place-items-center w-9 h-9 rounded-lg bg-brand/15 border border-brand/30 text-brand text-sm">
+            <i class="fas fa-rocket"></i>
+          </span>
+          DigitalHub
+        </a>
+        <p class="text-xs text-gray-500 mt-2 ml-0.5">Admin Panel</p>
+      </div>
+
+      <nav class="flex-1 p-4 space-y-1.5">
+        <p class="text-[10px] uppercase tracking-[0.16em] text-gray-600 font-semibold px-2 pb-2">Manage</p>
+        <a href="/admin/dashboard" class="nav-item">
+          <i class="fas fa-chart-line"></i> Dashboard
+        </a>
+        <a href="/admin/blogs" class="nav-item active">
+          <i class="fas fa-newspaper"></i> Manage Blogs
+        </a>
+        <a href="/admin/team" class="nav-item">
+          <i class="fas fa-users"></i> Manage Team
+        </a>
+        <a href="/admin/site-images" class="nav-item"><i class="fas fa-images"></i> Site Images</a>
+      </nav>
+
+      <div class="p-4 border-t border-white/10 space-y-1.5">
+        <a href="/" target="_blank" rel="noopener" class="nav-item">
+          <i class="fas fa-arrow-up-right-from-square"></i> View Site
+        </a>
+        <a href="/api/auth/logout" class="nav-item hover:!text-brand-light">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 min-w-0">
+      <!-- Mobile top bar -->
+      <header class="lg:hidden sticky top-0 z-20 flex items-center justify-between gap-3 px-4 py-3 border-b border-white/10 bg-ink-900/90 backdrop-blur">
+        <a href="/" class="flex items-center gap-2 font-bold font-display text-white">
+          <span class="grid place-items-center w-8 h-8 rounded-lg bg-brand/15 border border-brand/30 text-brand text-xs">
+            <i class="fas fa-rocket"></i>
+          </span>
+          DigitalHub
+        </a>
+        <nav class="flex items-center gap-1 text-sm">
+          <a href="/admin/dashboard" class="px-2.5 py-1.5 rounded-lg text-gray-400 hover:text-white" title="Dashboard"><i class="fas fa-chart-line"></i></a>
+          <a href="/admin/blogs" class="px-2.5 py-1.5 rounded-lg text-brand font-semibold" title="Manage Blogs"><i class="fas fa-newspaper"></i></a>
+          <a href="/admin/team" class="px-2.5 py-1.5 rounded-lg text-gray-400 hover:text-white" title="Manage Team"><i class="fas fa-users"></i></a>
+          <a href="/admin/site-images" class="px-2.5 py-1.5 rounded-lg text-gray-400 hover:text-white" title="Site Images"><i class="fas fa-images"></i></a>
+          <a href="/api/auth/logout" class="px-2.5 py-1.5 rounded-lg text-gray-400 hover:text-brand" title="Logout"><i class="fas fa-sign-out-alt"></i></a>
+        </nav>
+      </header>
+
+      <main class="p-5 sm:p-8 max-w-7xl">
+        <div class="flex flex-wrap justify-between items-end gap-4 mb-8">
+          <div>
+            <div class="eyebrow mb-4">Content</div>
+            <h1 class="text-3xl sm:text-4xl font-bold mb-2">
+              Manage <span class="gradient-text">Blogs</span>
+            </h1>
+            <p class="text-gray-400 text-sm">Create, edit and publish posts for the site.</p>
+          </div>
+          <a href="/admin/blogs/new" class="primary-btn !py-2.5 !px-5 text-sm">
+            <i class="fas fa-plus text-xs"></i> New Blog
+          </a>
+        </div>
+
+        <div class="glass overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="data-table min-w-[720px]">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Category</th>
+                  <th>Author</th>
+                  <th>Views</th>
+                  <th>Status</th>
+                  <th class="text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="blogsList">
+                <tr>
+                  <td colspan="6" class="!p-0">
+                    <div class="animate-pulse p-5 space-y-3">
+                      <div class="h-9 rounded-lg bg-white/[0.04]"></div>
+                      <div class="h-9 rounded-lg bg-white/[0.04]"></div>
+                      <div class="h-9 rounded-lg bg-white/[0.04]"></div>
+                      <div class="h-9 rounded-lg bg-white/[0.04]"></div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const escapeHtml = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+    loadBlogs();
+
+    function loadBlogs() {
+      fetch("/api/blogs/all")
+        .then(res => res.json())
+        .then(blogs => {
+          const tbody = document.getElementById("blogsList");
+
+          if (!blogs.length) {
+            tbody.innerHTML =
+              '<tr><td colspan="6" class="!py-16 text-center">' +
+              '<i class="fas fa-feather text-4xl text-gray-700 mb-4 block"></i>' +
+              '<p class="text-white font-semibold mb-1.5">No blogs yet</p>' +
+              '<p class="text-gray-500 text-sm mb-5">Your first post is one click away.</p>' +
+              '<a href="/admin/blogs/new" class="text-sm text-brand font-semibold hover:underline">' +
+              '<i class="fas fa-plus text-xs mr-1.5"></i>Create a blog post</a>' +
+              '</td></tr>';
+            return;
+          }
+
+          tbody.innerHTML = blogs.map(blog => {
+            const id = encodeURIComponent(blog.id);
+            const idAttr = escapeHtml(blog.id);
+            const date = blog.createdAt
+              ? new Date(blog.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+              : "";
+            return `
+              <tr>
+                <td>
+                  <p class="font-semibold text-white truncate max-w-[22rem]">${escapeHtml(blog.title)}</p>
+                  ${date ? `<p class="text-xs text-gray-600 mt-1"><i class="fas fa-calendar text-[10px] mr-1.5"></i>${escapeHtml(date)}</p>` : ""}
+                </td>
+                <td>
+                  <span class="pill bg-brand/10 border border-brand/25 text-brand">${escapeHtml(blog.category || "Uncategorized")}</span>
+                </td>
+                <td>${escapeHtml(blog.author || "Admin")}</td>
+                <td><i class="fas fa-eye text-gray-600 text-xs mr-1.5"></i>${blog.views || 0}</td>
+                <td>
+                  <span class="pill ${blog.published ? "pill-published" : "pill-draft"}">
+                    <i class="fas fa-circle text-[6px]"></i>${blog.published ? "Published" : "Draft"}
+                  </span>
+                </td>
+                <td>
+                  <div class="flex items-center justify-end gap-2">
+                    <a href="/admin/blogs/${id}/edit" class="icon-btn" title="Edit"><i class="fas fa-pen"></i></a>
+                    <button type="button" onclick="deleteBlog('${idAttr}')" class="icon-btn danger" title="Delete"><i class="fas fa-trash"></i></button>
+                  </div>
+                </td>
+              </tr>`;
+          }).join("");
+        })
+        .catch(() => {
+          document.getElementById("blogsList").innerHTML =
+            '<tr><td colspan="6" class="!py-16 text-center">' +
+            '<i class="fas fa-triangle-exclamation text-3xl text-gray-700 mb-3 block"></i>' +
+            '<p class="text-gray-500 text-sm">Could not load blogs right now.</p></td></tr>';
+        });
+    }
+
+    function deleteBlog(id) {
+      if (confirm("Are you sure you want to delete this blog?")) {
+        fetch(`/api/blogs/${id}`, { method: "DELETE" })
+          .then(res => {
+            if (res.ok) {
+              loadBlogs();
+            } else {
+              alert("Could not delete this blog.");
+            }
+          })
+          .catch(() => alert("Could not delete this blog."));
+      }
+    }
+  </script>
+</body>
+</html>

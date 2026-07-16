@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof title !== "undefined" ? title : "DigitalHub - Digital Solutions That Empower Businesses" %></title>
+  <meta name="description" content="DigitalHub builds web, mobile, marketing and automation solutions that drive real business results.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: { 900: "#07070b", 800: "#0d0d14", 700: "#14141d", 600: "#1c1c28" },
+            brand: { DEFAULT: "#ef4444", dark: "#dc2626", light: "#f87171" },
+          },
+          fontFamily: {
+            display: ["Sora", "system-ui", "sans-serif"],
+            sans: ["Inter", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    :root {
+      --primary: #ef4444;
+      --primary-dark: #dc2626;
+      --ink: #07070b;
+      --surface: rgba(255, 255, 255, 0.035);
+      --border: rgba(255, 255, 255, 0.09);
+    }
+
+    body {
+      background: var(--ink);
+      color: #e7e7ea;
+      font-family: "Inter", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 { font-family: "Sora", system-ui, sans-serif; letter-spacing: -0.02em; }
+
+    /* Ambient red glow behind the page, fixed so sections drift over it. */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(60rem 40rem at 75% -10%, rgba(239, 68, 68, 0.13), transparent 60%),
+        radial-gradient(45rem 35rem at 5% 15%, rgba(239, 68, 68, 0.06), transparent 55%);
+    }
+    body > * { position: relative; z-index: 1; }
+
+    /* --- Components (plain CSS: no build step, no @apply dependency) --- */
+    .primary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: linear-gradient(180deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      padding: 0.8rem 1.6rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 8px 24px -8px rgba(239, 68, 68, 0.65);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+      cursor: pointer;
+    }
+    .primary-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px -8px rgba(239, 68, 68, 0.8);
+      filter: brightness(1.06);
+    }
+
+    .ghost-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.6rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      color: #fff;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      backdrop-filter: blur(8px);
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+      cursor: pointer;
+    }
+    .ghost-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.22);
+      transform: translateY(-2px);
+    }
+
+    .glass {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      backdrop-filter: blur(10px);
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+    .glass:hover {
+      transform: translateY(-4px);
+      border-color: rgba(239, 68, 68, 0.4);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .service-icon {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-size: 1.15rem;
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.28);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--primary);
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+    }
+
+    .gradient-text {
+      background: linear-gradient(120deg, #fff 15%, var(--primary) 55%, #fca5a5 90%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-section { background: transparent; }
+
+    .nav-active { color: var(--primary) !important; font-weight: 600; }
+
+    .red-accent { border-left: 3px solid var(--primary); padding-left: 1rem; }
+
+    .field {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 0.7rem;
+      padding: 0.75rem 1rem;
+      color: #fff;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .field::placeholder { color: rgba(255, 255, 255, 0.35); }
+    .field:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    /* Grid backdrop for section variety */
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 40%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 40%, transparent 100%);
+    }
+
+    /* Scroll reveal -- opt-out under reduced motion */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    ::selection { background: rgba(239, 68, 68, 0.35); }
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #0b0b12; }
+    ::-webkit-scrollbar-thumb { background: #2a2a38; border-radius: 999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3a3a4d; }
+  </style>
+</head>
+<body>
+  <%- include("partials/navbar") %>
+  <main><%- body %></main>
+  <%- include("partials/footer") %>
+
+  <script>
+    // Reveal on scroll.
+    (() => {
+      const els = document.querySelectorAll(".reveal");
+      if (!els.length) return;
+      if (!("IntersectionObserver" in window)) {
+        els.forEach((el) => el.classList.add("visible"));
+        return;
+      }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("visible");
+          io.unobserve(entry.target);
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+      els.forEach((el) => io.observe(el));
+    })();
+
+    // Count-up for [data-count] once it scrolls into view.
+    (() => {
+      const nums = document.querySelectorAll("[data-count]");
+      if (!nums.length || !("IntersectionObserver" in window)) return;
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          io.unobserve(el);
+          const target = parseInt(el.dataset.count, 10);
+          const suffix = el.dataset.suffix || "";
+          if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            el.textContent = target + suffix;
+            return;
+          }
+          const start = performance.now();
+          const tick = (now) => {
+            const p = Math.min((now - start) / 1400, 1);
+            const eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = Math.round(target * eased) + suffix;
+            if (p < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        });
+      }, { threshold: 0.5 });
+      nums.forEach((el) => io.observe(el));
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!-- ============================ HERO ============================ -->
+<section class="hero-section relative overflow-hidden">
+  <div class="absolute inset-0 grid-bg pointer-events-none"></div>
+
+  <div class="relative max-w-7xl mx-auto px-4 pt-20 pb-16 lg:pt-28 lg:pb-20">
+    <div class="max-w-3xl">
+      <div class="eyebrow mb-6 reveal">
+        <span class="w-1.5 h-1.5 rounded-full bg-brand animate-pulse"></span>
+        Insights
+      </div>
+
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.08] mb-6 reveal">
+        Latest Articles<br>
+        &amp; <span class="gradient-text">Insights</span>
+      </h1>
+
+      <p class="text-lg text-gray-400 leading-relaxed max-w-xl mb-9 reveal">
+        Practical notes on what we're building and learning — the decisions, the
+        trade-offs, and the things we'd do differently next time.
+      </p>
+
+      <div class="flex flex-wrap gap-3 reveal">
+        <a href="/contact" class="primary-btn">
+          Work With Us <i class="fas fa-arrow-right text-xs"></i>
+        </a>
+        <a href="/services" class="ghost-btn">
+          <i class="fas fa-layer-group text-xs"></i> See Our Services
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= TOPIC FILTER ========================= -->
+<section class="border-y border-white/10 bg-white/[0.02]">
+  <div class="max-w-7xl mx-auto px-4 py-6">
+    <div class="flex flex-wrap items-center justify-between gap-4">
+      <div id="blogFilters" class="flex flex-wrap gap-2" role="group" aria-label="Filter posts by topic">
+        <!-- Populated once posts load. -->
+      </div>
+      <p id="blogCount" class="text-xs uppercase tracking-[0.2em] text-gray-600"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ POSTS ============================ -->
+<section class="py-24">
+  <div class="max-w-7xl mx-auto px-4">
+    <div id="blogContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="glass p-7 animate-pulse"><div class="h-4 bg-white/10 rounded w-1/3 mb-4"></div><div class="h-5 bg-white/10 rounded w-3/4 mb-3"></div><div class="h-3 bg-white/5 rounded w-full"></div></div>
+      <div class="glass p-7 animate-pulse"><div class="h-4 bg-white/10 rounded w-1/3 mb-4"></div><div class="h-5 bg-white/10 rounded w-3/4 mb-3"></div><div class="h-3 bg-white/5 rounded w-full"></div></div>
+      <div class="glass p-7 animate-pulse"><div class="h-4 bg-white/10 rounded w-1/3 mb-4"></div><div class="h-5 bg-white/10 rounded w-3/4 mb-3"></div><div class="h-3 bg-white/5 rounded w-full"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== CTA ============================== -->
+<section class="pb-24">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-ink-700 to-ink-900 px-8 py-16 sm:px-16 sm:py-20 text-center reveal">
+      <div class="absolute inset-0 grid-bg opacity-60 pointer-events-none"></div>
+      <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[36rem] h-[36rem] bg-brand/20 blur-[100px] rounded-full pointer-events-none"></div>
+
+      <div class="relative">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-5">
+          Got a project worth <span class="gradient-text">writing about?</span>
+        </h2>
+        <p class="text-gray-400 max-w-xl mx-auto mb-10 leading-relaxed">
+          Tell us what you're working on. We'll come back within 24 hours with honest
+          thoughts on whether we're the right team for it.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href="/contact" class="primary-btn">
+            Start a Conversation <i class="fas fa-arrow-right text-xs"></i>
+          </a>
+          <a href="/about" class="ghost-btn">Meet the Team</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const container = document.getElementById("blogContainer");
+    const filters = document.getElementById("blogFilters");
+    const count = document.getElementById("blogCount");
+
+    // Everything below goes through innerHTML, so API data must be escaped first.
+    const escape = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+    const FALLBACK_IMG = "<%= siteImages['blog.fallback'] %>";
+
+    const notice = (icon, msg) =>
+      '<div class="glass p-12 text-center md:col-span-2 lg:col-span-3">' +
+      '<i class="fas ' + icon + ' text-3xl text-gray-700 mb-4"></i>' +
+      '<p class="text-gray-500">' + msg + "</p></div>";
+
+    const card = (blog) => {
+      const date = blog.createdAt
+        ? new Date(blog.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+        : "";
+      const img = blog.image || FALLBACK_IMG;
+      const excerpt = blog.excerpt || (blog.content ? String(blog.content).replace(/<[^>]*>/g, "").slice(0, 140) + "..." : "");
+
+      return `
+        <a href="/blog/${encodeURIComponent(blog.slug)}" class="glass overflow-hidden group flex flex-col">
+          <div class="h-48 overflow-hidden relative">
+            <img src="${escape(img)}" alt="${escape(blog.title)}" loading="lazy"
+                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 right-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-ink-900/80 border border-white/10 text-xs text-gray-400 backdrop-blur">
+              <i class="fas fa-eye text-[0.65rem]"></i> ${escape(blog.views || 0)}
+            </span>
+          </div>
+          <div class="p-6 flex flex-col flex-1">
+            <div class="flex items-center gap-3 text-xs text-gray-500 mb-3">
+              <span class="px-2.5 py-1 rounded-full bg-brand/10 border border-brand/25 text-brand font-medium">${escape(blog.category || "General")}</span>
+              <span>${escape(date)}</span>
+            </div>
+            <h3 class="text-lg font-bold mb-2 group-hover:text-brand transition line-clamp-2">${escape(blog.title)}</h3>
+            <p class="text-sm text-gray-400 leading-relaxed line-clamp-3 mb-5">${escape(excerpt)}</p>
+            <div class="flex justify-between items-center pt-4 mt-auto border-t border-white/10">
+              <span class="text-xs text-gray-500 inline-flex items-center gap-2">
+                <i class="fas fa-user-pen text-[0.65rem]"></i> ${escape(blog.author || "Admin")}
+              </span>
+              <span class="text-sm text-brand font-semibold inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all">
+                Read More <i class="fas fa-arrow-right text-xs"></i>
+              </span>
+            </div>
+          </div>
+        </a>`;
+    };
+
+    const render = (blogs) => {
+      if (!blogs.length) {
+        container.innerHTML = notice("fa-filter-circle-xmark", "No posts in this topic yet.");
+        return;
+      }
+      container.innerHTML = blogs.map(card).join("");
+    };
+
+    fetch("/api/blogs")
+      .then((res) => (res.ok ? res.json() : Promise.reject(new Error(res.status))))
+      .then((blogs) => {
+        if (!blogs.length) {
+          container.innerHTML = notice("fa-feather", "No posts published yet — check back soon.");
+          return;
+        }
+
+        count.textContent = blogs.length + (blogs.length === 1 ? " Post" : " Posts");
+
+        // Build the topic pills from whatever categories the CMS actually has.
+        const cats = ["All"].concat(
+          [...new Set(blogs.map((b) => b.category).filter(Boolean))].sort()
+        );
+
+        filters.innerHTML = cats.map((c, i) => `
+          <button type="button" data-cat="${escape(c)}"
+                  class="blog-filter px-4 py-1.5 rounded-full text-sm font-medium border transition ${
+                    i === 0
+                      ? "bg-brand/15 border-brand/40 text-brand"
+                      : "bg-white/[0.03] border-white/10 text-gray-400 hover:text-white hover:border-white/25"
+                  }">${escape(c)}</button>`).join("");
+
+        filters.addEventListener("click", (e) => {
+          const btn = e.target.closest(".blog-filter");
+          if (!btn) return;
+          const cat = btn.dataset.cat;
+
+          filters.querySelectorAll(".blog-filter").forEach((b) => {
+            const on = b === btn;
+            b.className = "blog-filter px-4 py-1.5 rounded-full text-sm font-medium border transition " +
+              (on
+                ? "bg-brand/15 border-brand/40 text-brand"
+                : "bg-white/[0.03] border-white/10 text-gray-400 hover:text-white hover:border-white/25");
+          });
+
+          const shown = cat === "All" ? blogs : blogs.filter((b) => b.category === cat);
+          count.textContent = shown.length + (shown.length === 1 ? " Post" : " Posts");
+          render(shown);
+        });
+
+        render(blogs);
+      })
+      .catch((err) => {
+        console.error("Error loading blogs:", err);
+        container.innerHTML = notice("fa-triangle-exclamation", "Posts are unavailable right now. Please try again shortly.");
+      });
+  })();
+</script>

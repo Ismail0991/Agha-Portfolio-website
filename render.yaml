@@ -1,0 +1,40 @@
+# Render Blueprint. Optional: you can create the service by hand in the dashboard
+# instead. If you use this, Render reads it on first deploy and provisions the service.
+#
+# sync: false means Render will NOT read the value from this file -- it prompts you to
+# enter it in the dashboard. Secrets must never live in a committed file.
+services:
+  - type: web
+    name: digitalhub-website
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+      # Render injects PORT automatically; server.js already reads process.env.PORT.
+
+      - key: JWT_SECRET
+        generateValue: true
+
+      # Base64 of your Firebase service account JSON. Generate locally with:
+      #   node -e "console.log(require('fs').readFileSync('your-key.json').toString('base64'))"
+      - key: FIREBASE_SERVICE_ACCOUNT_BASE64
+        sync: false
+
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: CLOUDINARY_FOLDER
+        value: digitalhub
+
+      # Leave false. Flip to true only long enough to create the first admin on a
+      # fresh database, then set it back.
+      - key: ALLOW_ADMIN_REGISTRATION
+        value: "false"

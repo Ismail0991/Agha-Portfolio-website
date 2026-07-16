@@ -1,0 +1,508 @@
+<!-- ============================ HERO ============================ -->
+<section class="hero-section relative overflow-hidden">
+  <div class="absolute inset-0 grid-bg pointer-events-none"></div>
+
+  <div class="relative max-w-7xl mx-auto px-4 pt-20 pb-24 lg:pt-28 lg:pb-32">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-14 items-center">
+      <div class="lg:col-span-7">
+        <div class="eyebrow mb-6 reveal">
+          <span class="w-1.5 h-1.5 rounded-full bg-brand animate-pulse"></span>
+          Digital Solutions Agency
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.08] mb-6 reveal">
+          Building Digital<br>
+          Solutions That<br>
+          <span class="gradient-text">Empower Businesses</span>
+        </h1>
+
+        <p class="text-lg text-gray-400 leading-relaxed max-w-xl mb-9 reveal">
+          We combine cutting-edge technology with creative strategy to deliver
+          solutions that drive real business results — not just pretty pixels.
+        </p>
+
+        <div class="flex flex-wrap gap-3 mb-14 reveal">
+          <a href="/services" class="primary-btn">
+            Explore Services <i class="fas fa-arrow-right text-xs"></i>
+          </a>
+          <a href="/contact" class="ghost-btn">
+            <i class="fas fa-calendar-check text-xs"></i> Book a Free Call
+          </a>
+        </div>
+
+        <div class="grid grid-cols-3 gap-6 max-w-lg reveal">
+          <div>
+            <h3 class="text-3xl font-bold text-brand font-display" data-count="50" data-suffix="+">0</h3>
+            <p class="text-sm text-gray-500 mt-1">Projects Delivered</p>
+          </div>
+          <div class="border-x border-white/10 px-6">
+            <h3 class="text-3xl font-bold text-brand font-display" data-count="30" data-suffix="+">0</h3>
+            <p class="text-sm text-gray-500 mt-1">Happy Clients</p>
+          </div>
+          <div>
+            <h3 class="text-3xl font-bold text-brand font-display" data-count="5" data-suffix="+">0</h3>
+            <p class="text-sm text-gray-500 mt-1">Years Experience</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5 reveal">
+        <div class="relative">
+          <div class="absolute -inset-4 bg-brand/20 blur-3xl rounded-full"></div>
+          <div class="relative glass p-3 !rounded-2xl">
+            <img src="<%= siteImages['home.hero'] %>"
+                 alt="Our team collaborating on a project"
+                 loading="lazy"
+                 class="rounded-xl w-full h-[380px] object-cover">
+            <div class="absolute -bottom-5 -left-5 glass !rounded-xl px-4 py-3 flex items-center gap-3 bg-ink-800/90">
+              <span class="grid place-items-center w-9 h-9 rounded-lg bg-green-500/15 border border-green-500/30 text-green-400">
+                <i class="fas fa-check"></i>
+              </span>
+              <div>
+                <p class="text-sm font-semibold leading-tight">Projects Delivered</p>
+                <p class="text-xs text-gray-500">On time, on budget</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= TRUST STRIP ========================= -->
+<section class="border-y border-white/10 bg-white/[0.02]">
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <p class="text-center text-xs uppercase tracking-[0.2em] text-gray-600 mb-6">
+      Trusted by teams building on modern stacks
+    </p>
+    <div class="flex flex-wrap justify-center items-center gap-x-12 gap-y-5 text-gray-600">
+      <i class="fab fa-react text-3xl hover:text-brand transition" title="React"></i>
+      <i class="fab fa-node-js text-3xl hover:text-brand transition" title="Node.js"></i>
+      <i class="fab fa-figma text-3xl hover:text-brand transition" title="Figma"></i>
+      <i class="fab fa-aws text-3xl hover:text-brand transition" title="AWS"></i>
+      <i class="fab fa-google text-3xl hover:text-brand transition" title="Google Cloud"></i>
+      <i class="fab fa-shopify text-3xl hover:text-brand transition" title="Shopify"></i>
+      <i class="fab fa-wordpress text-3xl hover:text-brand transition" title="WordPress"></i>
+    </div>
+  </div>
+</section>
+
+<!-- =========================== SERVICES =========================== -->
+<section class="py-24">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="max-w-2xl mb-14 reveal">
+      <div class="eyebrow mb-4">What We Do</div>
+      <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+        Services built around <span class="gradient-text">your growth</span>
+      </h2>
+      <p class="text-gray-400 leading-relaxed">
+        Four core disciplines, one team. We plug into your business wherever the
+        gap is — and stay accountable to outcomes, not deliverables.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="glass p-7 reveal">
+        <div class="service-icon mb-5"><i class="fas fa-code"></i></div>
+        <h3 class="text-lg font-bold mb-2.5">Web Development</h3>
+        <p class="text-sm text-gray-400 leading-relaxed mb-5">
+          Custom websites and web applications built with modern technologies that scale.
+        </p>
+        <a href="/services" class="text-sm text-brand font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all">
+          Learn More <i class="fas fa-arrow-right text-xs"></i>
+        </a>
+      </div>
+
+      <div class="glass p-7 reveal">
+        <div class="service-icon mb-5"><i class="fas fa-mobile-screen-button"></i></div>
+        <h3 class="text-lg font-bold mb-2.5">App Development</h3>
+        <p class="text-sm text-gray-400 leading-relaxed mb-5">
+          Native and cross-platform mobile applications for iOS and Android.
+        </p>
+        <a href="/services" class="text-sm text-brand font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all">
+          Learn More <i class="fas fa-arrow-right text-xs"></i>
+        </a>
+      </div>
+
+      <div class="glass p-7 reveal">
+        <div class="service-icon mb-5"><i class="fas fa-chart-line"></i></div>
+        <h3 class="text-lg font-bold mb-2.5">Digital Marketing</h3>
+        <p class="text-sm text-gray-400 leading-relaxed mb-5">
+          Strategic marketing solutions to boost your online presence and pipeline.
+        </p>
+        <a href="/services" class="text-sm text-brand font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all">
+          Learn More <i class="fas fa-arrow-right text-xs"></i>
+        </a>
+      </div>
+
+      <div class="glass p-7 reveal">
+        <div class="service-icon mb-5"><i class="fas fa-video"></i></div>
+        <h3 class="text-lg font-bold mb-2.5">YouTube Automation</h3>
+        <p class="text-sm text-gray-400 leading-relaxed mb-5">
+          Automate and scale your YouTube channel for maximum reach and growth.
+        </p>
+        <a href="/services" class="text-sm text-brand font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all">
+          Learn More <i class="fas fa-arrow-right text-xs"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================== WHY CHOOSE US ========================== -->
+<section class="py-24 border-y border-white/10 bg-white/[0.02]">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div class="reveal">
+        <div class="eyebrow mb-4">Why DigitalHub</div>
+        <h2 class="text-3xl sm:text-4xl font-bold mb-5">
+          A partner, not just <span class="gradient-text">a vendor</span>
+        </h2>
+        <p class="text-gray-400 leading-relaxed mb-8">
+          Plenty of agencies can ship a website. We care about what happens after
+          launch — whether it loads fast, ranks well, converts, and keeps earning
+          its keep six months from now.
+        </p>
+
+        <div class="space-y-5">
+          <div class="flex gap-4">
+            <span class="service-icon shrink-0"><i class="fas fa-bolt"></i></span>
+            <div>
+              <h3 class="font-semibold mb-1">Fast, Transparent Delivery</h3>
+              <p class="text-sm text-gray-400 leading-relaxed">Weekly demos and a shared board. You always know exactly where your project stands.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <span class="service-icon shrink-0"><i class="fas fa-users-gear"></i></span>
+            <div>
+              <h3 class="font-semibold mb-1">Senior People, No Handoffs</h3>
+              <p class="text-sm text-gray-400 leading-relaxed">The people who scope your project are the ones who build it. No bait and switch.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <span class="service-icon shrink-0"><i class="fas fa-chart-simple"></i></span>
+            <div>
+              <h3 class="font-semibold mb-1">Measured on Outcomes</h3>
+              <p class="text-sm text-gray-400 leading-relaxed">We agree on the numbers that matter up front, then report against them honestly.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <span class="service-icon shrink-0"><i class="fas fa-shield-halved"></i></span>
+            <div>
+              <h3 class="font-semibold mb-1">Built to Last</h3>
+              <p class="text-sm text-gray-400 leading-relaxed">Clean, documented, tested code you can hand to any developer without apology.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-5 reveal">
+        <div class="glass p-7 text-center">
+          <p class="text-4xl font-bold text-brand font-display" data-count="98" data-suffix="%">0</p>
+          <p class="text-sm text-gray-500 mt-2">Client Retention</p>
+        </div>
+        <div class="glass p-7 text-center mt-8">
+          <p class="text-4xl font-bold text-brand font-display" data-count="24" data-suffix="h">0</p>
+          <p class="text-sm text-gray-500 mt-2">Avg. Response Time</p>
+        </div>
+        <div class="glass p-7 text-center">
+          <p class="text-4xl font-bold text-brand font-display" data-count="12" data-suffix="+">0</p>
+          <p class="text-sm text-gray-500 mt-2">Industries Served</p>
+        </div>
+        <div class="glass p-7 text-center mt-8">
+          <p class="text-4xl font-bold text-brand font-display" data-count="100" data-suffix="%">0</p>
+          <p class="text-sm text-gray-500 mt-2">On-Time Launches</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PROCESS ============================ -->
+<section class="py-24">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="max-w-2xl mx-auto text-center mb-16 reveal">
+      <div class="eyebrow mb-4">How We Work</div>
+      <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+        From idea to launch in <span class="gradient-text">four steps</span>
+      </h2>
+      <p class="text-gray-400 leading-relaxed">
+        A process refined over five years and fifty projects. No mystery, no surprises.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="glass p-7 relative reveal">
+        <span class="absolute top-6 right-7 text-5xl font-bold font-display text-white/[0.06]">01</span>
+        <div class="service-icon mb-5"><i class="fas fa-comments"></i></div>
+        <h3 class="text-lg font-bold mb-2.5">Discover</h3>
+        <p class="text-sm text-gray-400 leading-relaxed">
+          We dig into your business, your users, and the problem worth solving before writing a line of code.
+        </p>
+      </div>
+      <div class="glass p-7 relative reveal">
+        <span class="absolute top-6 right-7 text-5xl font-bold font-display text-white/[0.06]">02</span>
+        <div class="service-icon mb-5"><i class="fas fa-pen-ruler"></i></div>
+        <h3 class="text-lg font-bold mb-2.5">Design</h3>
+        <p class="text-sm text-gray-400 leading-relaxed">
+          Wireframes and prototypes you can click through, so you see it before you buy it.
+        </p>
+      </div>
+      <div class="glass p-7 relative reveal">
+        <span class="absolute top-6 right-7 text-5xl font-bold font-display text-white/[0.06]">03</span>
+        <div class="service-icon mb-5"><i class="fas fa-laptop-code"></i></div>
+        <h3 class="text-lg font-bold mb-2.5">Build</h3>
+        <p class="text-sm text-gray-400 leading-relaxed">
+          Weekly builds you can actually use. Feedback goes straight into the next sprint.
+        </p>
+      </div>
+      <div class="glass p-7 relative reveal">
+        <span class="absolute top-6 right-7 text-5xl font-bold font-display text-white/[0.06]">04</span>
+        <div class="service-icon mb-5"><i class="fas fa-rocket"></i></div>
+        <h3 class="text-lg font-bold mb-2.5">Launch &amp; Grow</h3>
+        <p class="text-sm text-gray-400 leading-relaxed">
+          We ship it, watch the numbers, and keep improving. Launch is the start, not the finish.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================== TESTIMONIALS ========================== -->
+<section class="py-24 border-y border-white/10 bg-white/[0.02]">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="max-w-2xl mx-auto text-center mb-16 reveal">
+      <div class="eyebrow mb-4">Testimonials</div>
+      <h2 class="text-3xl sm:text-4xl font-bold">
+        What our clients <span class="gradient-text">say</span>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <figure class="glass p-7 reveal">
+        <div class="flex gap-1 text-brand mb-4 text-sm">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        </div>
+        <blockquote class="text-gray-300 leading-relaxed mb-6 text-sm">
+          "They rebuilt our storefront in six weeks and our conversion rate went up by
+          a third. What stood out was how much they pushed back on ideas that wouldn't work."
+        </blockquote>
+        <figcaption class="flex items-center gap-3 pt-5 border-t border-white/10">
+          <span class="grid place-items-center w-10 h-10 rounded-full bg-brand/15 border border-brand/30 text-brand font-semibold text-sm">SR</span>
+          <div>
+            <p class="text-sm font-semibold">Sarah Reynolds</p>
+            <p class="text-xs text-gray-500">Founder, Bloom Retail</p>
+          </div>
+        </figcaption>
+      </figure>
+
+      <figure class="glass p-7 reveal">
+        <div class="flex gap-1 text-brand mb-4 text-sm">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        </div>
+        <blockquote class="text-gray-300 leading-relaxed mb-6 text-sm">
+          "The weekly demos changed everything. We never had that sinking feeling of
+          wondering what we'd actually get at the end. Rare in this industry."
+        </blockquote>
+        <figcaption class="flex items-center gap-3 pt-5 border-t border-white/10">
+          <span class="grid place-items-center w-10 h-10 rounded-full bg-brand/15 border border-brand/30 text-brand font-semibold text-sm">MO</span>
+          <div>
+            <p class="text-sm font-semibold">Marcus Obi</p>
+            <p class="text-xs text-gray-500">CTO, Northwind Logistics</p>
+          </div>
+        </figcaption>
+      </figure>
+
+      <figure class="glass p-7 reveal">
+        <div class="flex gap-1 text-brand mb-4 text-sm">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-stroke"></i>
+        </div>
+        <blockquote class="text-gray-300 leading-relaxed mb-6 text-sm">
+          "Our channel went from 2k to 90k subscribers in eight months. They treated
+          our growth like it was their own business on the line."
+        </blockquote>
+        <figcaption class="flex items-center gap-3 pt-5 border-t border-white/10">
+          <span class="grid place-items-center w-10 h-10 rounded-full bg-brand/15 border border-brand/30 text-brand font-semibold text-sm">AK</span>
+          <div>
+            <p class="text-sm font-semibold">Aisha Khan</p>
+            <p class="text-xs text-gray-500">Creator, TechUnpacked</p>
+          </div>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= LATEST FROM THE BLOG ======================= -->
+<section class="py-24">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex flex-wrap justify-between items-end gap-4 mb-14 reveal">
+      <div class="max-w-xl">
+        <div class="eyebrow mb-4">Insights</div>
+        <h2 class="text-3xl sm:text-4xl font-bold mb-3">
+          Latest from the <span class="gradient-text">blog</span>
+        </h2>
+        <p class="text-gray-400">Practical notes on what we're building and learning.</p>
+      </div>
+      <a href="/blog" class="ghost-btn !py-2.5 !px-5 text-sm">
+        View All Posts <i class="fas fa-arrow-right text-xs"></i>
+      </a>
+    </div>
+
+    <div id="homeBlogs" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="glass p-7 animate-pulse"><div class="h-4 bg-white/10 rounded w-1/3 mb-4"></div><div class="h-5 bg-white/10 rounded w-3/4 mb-3"></div><div class="h-3 bg-white/5 rounded w-full"></div></div>
+      <div class="glass p-7 animate-pulse"><div class="h-4 bg-white/10 rounded w-1/3 mb-4"></div><div class="h-5 bg-white/10 rounded w-3/4 mb-3"></div><div class="h-3 bg-white/5 rounded w-full"></div></div>
+      <div class="glass p-7 animate-pulse"><div class="h-4 bg-white/10 rounded w-1/3 mb-4"></div><div class="h-5 bg-white/10 rounded w-3/4 mb-3"></div><div class="h-3 bg-white/5 rounded w-full"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== FAQ ============================== -->
+<section class="py-24 border-t border-white/10 bg-white/[0.02]">
+  <div class="max-w-3xl mx-auto px-4">
+    <div class="text-center mb-14 reveal">
+      <div class="eyebrow mb-4">FAQ</div>
+      <h2 class="text-3xl sm:text-4xl font-bold">
+        Questions, <span class="gradient-text">answered</span>
+      </h2>
+    </div>
+
+    <div class="space-y-3">
+      <details class="glass p-6 group reveal">
+        <summary class="flex justify-between items-center cursor-pointer font-semibold list-none">
+          How long does a typical project take?
+          <i class="fas fa-plus text-brand text-sm transition-transform group-open:rotate-45"></i>
+        </summary>
+        <p class="text-sm text-gray-400 leading-relaxed mt-4">
+          A marketing site usually runs four to six weeks. A full web application is
+          more like three to four months. We'll give you a real range after the
+          discovery call — not an optimistic one.
+        </p>
+      </details>
+
+      <details class="glass p-6 group reveal">
+        <summary class="flex justify-between items-center cursor-pointer font-semibold list-none">
+          How do you price your work?
+          <i class="fas fa-plus text-brand text-sm transition-transform group-open:rotate-45"></i>
+        </summary>
+        <p class="text-sm text-gray-400 leading-relaxed mt-4">
+          Fixed price for well-defined scope, monthly retainer for ongoing work. Either
+          way you get the number before we start, and we don't bill surprises.
+        </p>
+      </details>
+
+      <details class="glass p-6 group reveal">
+        <summary class="flex justify-between items-center cursor-pointer font-semibold list-none">
+          Do you work with early-stage startups?
+          <i class="fas fa-plus text-brand text-sm transition-transform group-open:rotate-45"></i>
+        </summary>
+        <p class="text-sm text-gray-400 leading-relaxed mt-4">
+          Often. We'll usually push for a smaller first release than you had in mind —
+          getting something real in front of users beats a perfect launch six months late.
+        </p>
+      </details>
+
+      <details class="glass p-6 group reveal">
+        <summary class="flex justify-between items-center cursor-pointer font-semibold list-none">
+          What happens after launch?
+          <i class="fas fa-plus text-brand text-sm transition-transform group-open:rotate-45"></i>
+        </summary>
+        <p class="text-sm text-gray-400 leading-relaxed mt-4">
+          You own everything — code, accounts, assets. Most clients keep us on a
+          support retainer, but you're never locked in, and we'll hand over cleanly
+          if you'd rather take it in-house.
+        </p>
+      </details>
+
+      <details class="glass p-6 group reveal">
+        <summary class="flex justify-between items-center cursor-pointer font-semibold list-none">
+          Can you work with our existing team?
+          <i class="fas fa-plus text-brand text-sm transition-transform group-open:rotate-45"></i>
+        </summary>
+        <p class="text-sm text-gray-400 leading-relaxed mt-4">
+          Yes. We regularly embed alongside in-house developers — sharing a board,
+          reviewing each other's pull requests, the same as any other teammate.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== CTA ============================== -->
+<section class="py-24">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-ink-700 to-ink-900 px-8 py-16 sm:px-16 sm:py-20 text-center reveal">
+      <div class="absolute inset-0 grid-bg opacity-60 pointer-events-none"></div>
+      <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[36rem] h-[36rem] bg-brand/20 blur-[100px] rounded-full pointer-events-none"></div>
+
+      <div class="relative">
+        <h2 class="text-3xl sm:text-5xl font-bold mb-5">
+          Let's Build Something Great <span class="gradient-text">Together</span>
+        </h2>
+        <p class="text-gray-400 max-w-xl mx-auto mb-10 leading-relaxed">
+          Tell us what you're working on. We'll come back within 24 hours with honest
+          thoughts on whether we're the right team for it.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href="/contact" class="primary-btn">
+            Get Started Today <i class="fas fa-arrow-right text-xs"></i>
+          </a>
+          <a href="/services" class="ghost-btn">See What We Do</a>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-x-8 gap-y-3 mt-12 text-sm text-gray-500">
+          <span class="inline-flex items-center gap-2"><i class="fas fa-check text-green-400"></i> Free consultation</span>
+          <span class="inline-flex items-center gap-2"><i class="fas fa-check text-green-400"></i> No obligation</span>
+          <span class="inline-flex items-center gap-2"><i class="fas fa-check text-green-400"></i> 24h response</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Pull the newest posts so the homepage reflects the CMS instead of hardcoded cards.
+  (() => {
+    const wrap = document.getElementById("homeBlogs");
+    const escape = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+    fetch("/api/blogs")
+      .then((res) => (res.ok ? res.json() : Promise.reject(new Error(res.status))))
+      .then((blogs) => {
+        if (!blogs.length) {
+          wrap.innerHTML =
+            '<div class="glass p-10 text-center md:col-span-3"><i class="fas fa-feather text-3xl text-gray-700 mb-3"></i>' +
+            '<p class="text-gray-500">No posts published yet — check back soon.</p></div>';
+          return;
+        }
+
+        wrap.innerHTML = blogs.slice(0, 3).map((b) => {
+          const date = b.createdAt
+            ? new Date(b.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+            : "";
+          const img = b.image || "<%= siteImages['blog.fallback'] %>";
+          return `
+            <a href="/blog/${encodeURIComponent(b.slug)}" class="glass overflow-hidden group block">
+              <div class="h-44 overflow-hidden">
+                <img src="${escape(img)}" alt="${escape(b.title)}" loading="lazy"
+                     class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              </div>
+              <div class="p-6">
+                <div class="flex items-center gap-3 text-xs text-gray-500 mb-3">
+                  ${b.category ? `<span class="px-2.5 py-1 rounded-full bg-brand/10 border border-brand/25 text-brand font-medium">${escape(b.category)}</span>` : ""}
+                  <span>${escape(date)}</span>
+                </div>
+                <h3 class="font-bold mb-2 group-hover:text-brand transition line-clamp-2">${escape(b.title)}</h3>
+                <p class="text-sm text-gray-400 leading-relaxed line-clamp-2">${escape(b.excerpt || "")}</p>
+              </div>
+            </a>`;
+        }).join("");
+      })
+      .catch(() => {
+        wrap.innerHTML =
+          '<div class="glass p-10 text-center md:col-span-3"><p class="text-gray-500">Posts are unavailable right now.</p></div>';
+      });
+  })();
+</script>

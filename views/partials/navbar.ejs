@@ -1,0 +1,69 @@
+<nav id="siteNav" class="sticky top-0 z-50 border-b border-white/10 bg-ink-900/70 backdrop-blur-xl">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex justify-between items-center h-16">
+      <a href="/" class="flex items-center gap-2.5 group">
+        <span class="grid place-items-center w-9 h-9 rounded-xl bg-brand/15 border border-brand/30 text-brand group-hover:bg-brand/25 transition">
+          <i class="fas fa-rocket"></i>
+        </span>
+        <span class="text-lg font-bold font-display tracking-tight">DigitalHub</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-1">
+        <a href="/" class="px-3 py-2 text-sm text-gray-300 hover:text-white rounded-lg hover:bg-white/5 transition">Home</a>
+        <a href="/about" class="px-3 py-2 text-sm text-gray-300 hover:text-white rounded-lg hover:bg-white/5 transition">About</a>
+        <a href="/services" class="px-3 py-2 text-sm text-gray-300 hover:text-white rounded-lg hover:bg-white/5 transition">Services</a>
+        <a href="/team" class="px-3 py-2 text-sm text-gray-300 hover:text-white rounded-lg hover:bg-white/5 transition">Team</a>
+        <a href="/blog" class="px-3 py-2 text-sm text-gray-300 hover:text-white rounded-lg hover:bg-white/5 transition">Blog</a>
+        <a href="/careers" class="px-3 py-2 text-sm text-gray-300 hover:text-white rounded-lg hover:bg-white/5 transition">Careers</a>
+      </div>
+
+      <div class="hidden md:flex items-center">
+        <a href="/contact" class="primary-btn !px-4 !py-2 !text-sm">
+          Let's Talk <i class="fas fa-arrow-right text-xs"></i>
+        </a>
+      </div>
+
+      <!-- There was previously no mobile navigation: the links were hidden below md with
+           nothing to replace them, so phone users had no way to move around the site. -->
+      <button id="navToggle" type="button"
+              class="md:hidden grid place-items-center w-10 h-10 rounded-lg border border-white/10 bg-white/5 text-white"
+              aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobileMenu">
+        <i class="fas fa-bars" id="navToggleIcon"></i>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobileMenu" class="md:hidden hidden border-t border-white/10 bg-ink-900/95 backdrop-blur-xl">
+    <div class="px-4 py-3 space-y-1">
+      <a href="/" class="block px-3 py-2.5 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition">Home</a>
+      <a href="/about" class="block px-3 py-2.5 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition">About</a>
+      <a href="/services" class="block px-3 py-2.5 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition">Services</a>
+      <a href="/team" class="block px-3 py-2.5 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition">Team</a>
+      <a href="/blog" class="block px-3 py-2.5 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition">Blog</a>
+      <a href="/careers" class="block px-3 py-2.5 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition">Careers</a>
+      <a href="/contact" class="primary-btn w-full mt-2">Let's Talk</a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  (() => {
+    const toggle = document.getElementById("navToggle");
+    const menu = document.getElementById("mobileMenu");
+    const icon = document.getElementById("navToggleIcon");
+
+    toggle.addEventListener("click", () => {
+      const open = !menu.classList.toggle("hidden");
+      toggle.setAttribute("aria-expanded", String(open));
+      icon.className = open ? "fas fa-xmark" : "fas fa-bars";
+    });
+
+    // Mark the current page in both menus.
+    const path = window.location.pathname;
+    document.querySelectorAll("#siteNav a[href^='/']").forEach((a) => {
+      const href = a.getAttribute("href");
+      const active = href === "/" ? path === "/" : path.startsWith(href);
+      if (active && !a.classList.contains("primary-btn")) a.classList.add("nav-active");
+    });
+  })();
+</script>

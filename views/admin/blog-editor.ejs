@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Editor - DigitalHub Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: { 900: "#07070b", 800: "#0d0d14", 700: "#14141d", 600: "#1c1c28" },
+            brand: { DEFAULT: "#ef4444", dark: "#dc2626", light: "#f87171" },
+          },
+          fontFamily: {
+            display: ["Sora", "system-ui", "sans-serif"],
+            sans: ["Inter", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    :root {
+      --primary: #ef4444;
+      --primary-dark: #dc2626;
+      --ink: #07070b;
+      --surface: rgba(255, 255, 255, 0.035);
+      --border: rgba(255, 255, 255, 0.09);
+    }
+
+    body {
+      background: var(--ink);
+      color: #e7e7ea;
+      font-family: "Inter", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 { font-family: "Sora", system-ui, sans-serif; letter-spacing: -0.02em; }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(60rem 40rem at 75% -10%, rgba(239, 68, 68, 0.13), transparent 60%),
+        radial-gradient(45rem 35rem at 5% 15%, rgba(239, 68, 68, 0.06), transparent 55%);
+    }
+    body > * { position: relative; z-index: 1; }
+
+    .primary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: linear-gradient(180deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      padding: 0.8rem 1.6rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 8px 24px -8px rgba(239, 68, 68, 0.65);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+      cursor: pointer;
+    }
+    .primary-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px -8px rgba(239, 68, 68, 0.8);
+      filter: brightness(1.06);
+    }
+    .primary-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; filter: none; }
+
+    .ghost-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.6rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      color: #fff;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      backdrop-filter: blur(8px);
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+      cursor: pointer;
+    }
+    .ghost-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.22);
+      transform: translateY(-2px);
+    }
+
+    .glass {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--primary);
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+    }
+
+    .gradient-text {
+      background: linear-gradient(120deg, #fff 15%, var(--primary) 55%, #fca5a5 90%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .field {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 0.7rem;
+      padding: 0.75rem 1rem;
+      color: #fff;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .field::placeholder { color: rgba(255, 255, 255, 0.35); }
+    .field:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: rgba(255, 255, 255, 0.07);
+    }
+    textarea.field { resize: vertical; min-height: 3rem; }
+
+    .field-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #d1d5db;
+      margin-bottom: 0.5rem;
+    }
+    .field-hint { font-size: 0.72rem; color: #6b7280; margin-top: 0.4rem; }
+
+    /* --- Admin shell --- */
+    .admin-sidebar {
+      background: rgba(9, 9, 14, 0.75);
+      border-right: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.7rem 0.9rem;
+      border-radius: 0.7rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #9ca3af;
+      border: 1px solid transparent;
+      transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+    .nav-item i { width: 1.1rem; text-align: center; font-size: 0.85rem; }
+    .nav-item:hover { color: #fff; background: rgba(255, 255, 255, 0.05); }
+    .nav-item.active {
+      color: #fff;
+      font-weight: 600;
+      background: rgba(239, 68, 68, 0.12);
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+    .nav-item.active i { color: var(--primary); }
+
+    /* Themed checkbox */
+    .checkbox {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 1.15rem;
+      height: 1.15rem;
+      border-radius: 0.35rem;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.05);
+      display: inline-grid;
+      place-content: center;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .checkbox::after {
+      content: "";
+      width: 0.55rem;
+      height: 0.3rem;
+      border-left: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+      transform: rotate(-45deg) scale(0);
+      transition: transform 0.15s ease;
+    }
+    .checkbox:checked { background: var(--primary); border-color: var(--primary); }
+    .checkbox:checked::after { transform: rotate(-45deg) scale(1); }
+    .checkbox:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+    ::selection { background: rgba(239, 68, 68, 0.35); }
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #0b0b12; }
+    ::-webkit-scrollbar-thumb { background: #2a2a38; border-radius: 999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3a3a4d; }
+
+    .upload-drop {
+      border: 1px dashed rgba(255, 255, 255, 0.18);
+      border-radius: 0.75rem;
+      transition: border-color .2s ease, background .2s ease;
+    }
+    .upload-drop:hover { border-color: rgba(255, 255, 255, 0.3); }
+    .upload-drop.dragover { border-color: var(--primary); background: rgba(239, 68, 68, 0.07); }
+  </style>
+</head>
+<body class="font-sans">
+  <div class="flex min-h-screen">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar hidden lg:flex lg:flex-col w-64 shrink-0 sticky top-0 h-screen">
+      <div class="p-6 border-b border-white/10">
+        <a href="/" class="flex items-center gap-2.5 text-xl font-bold font-display text-white">
+          <span class="grid place-items-center w-9 h-9 rounded-lg bg-brand/15 border border-brand/30 text-brand text-sm">
+            <i class="fas fa-rocket"></i>
+          </span>
+          DigitalHub
+        </a>
+        <p class="text-xs text-gray-500 mt-2 ml-0.5">Admin Panel</p>
+      </div>
+
+      <nav class="flex-1 p-4 space-y-1.5">
+        <p class="text-[10px] uppercase tracking-[0.16em] text-gray-600 font-semibold px-2 pb-2">Manage</p>
+        <a href="/admin/dashboard" class="nav-item">
+          <i class="fas fa-chart-line"></i> Dashboard
+        </a>
+        <a href="/admin/blogs" class="nav-item active">
+          <i class="fas fa-newspaper"></i> Manage Blogs
+        </a>
+        <a href="/admin/team" class="nav-item">
+          <i class="fas fa-users"></i> Manage Team
+        </a>
+        <a href="/admin/site-images" class="nav-item"><i class="fas fa-images"></i> Site Images</a>
+      </nav>
+
+      <div class="p-4 border-t border-white/10 space-y-1.5">
+        <a href="/" target="_blank" rel="noopener" class="nav-item">
+          <i class="fas fa-arrow-up-right-from-square"></i> View Site
+        </a>
+        <a href="/api/auth/logout" class="nav-item hover:!text-brand-light">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 min-w-0">
+      <!-- Mobile top bar -->
+      <header class="lg:hidden sticky top-0 z-20 flex items-center justify-between gap-3 px-4 py-3 border-b border-white/10 bg-ink-900/90 backdrop-blur">
+        <a href="/" class="flex items-center gap-2 font-bold font-display text-white">
+          <span class="grid place-items-center w-8 h-8 rounded-lg bg-brand/15 border border-brand/30 text-brand text-xs">
+            <i class="fas fa-rocket"></i>
+          </span>
+          DigitalHub
+        </a>
+        <nav class="flex items-center gap-1 text-sm">
+          <a href="/admin/dashboard" class="px-2.5 py-1.5 rounded-lg text-gray-400 hover:text-white" title="Dashboard"><i class="fas fa-chart-line"></i></a>
+          <a href="/admin/blogs" class="px-2.5 py-1.5 rounded-lg text-brand font-semibold" title="Manage Blogs"><i class="fas fa-newspaper"></i></a>
+          <a href="/admin/team" class="px-2.5 py-1.5 rounded-lg text-gray-400 hover:text-white" title="Manage Team"><i class="fas fa-users"></i></a>
+          <a href="/admin/site-images" class="px-2.5 py-1.5 rounded-lg text-gray-400 hover:text-white" title="Site Images"><i class="fas fa-images"></i></a>
+          <a href="/api/auth/logout" class="px-2.5 py-1.5 rounded-lg text-gray-400 hover:text-brand" title="Logout"><i class="fas fa-sign-out-alt"></i></a>
+        </nav>
+      </header>
+
+      <main class="p-5 sm:p-8">
+        <div class="max-w-4xl">
+          <nav class="flex items-center gap-2 text-xs text-gray-600 mb-5">
+            <a href="/admin/blogs" class="hover:text-brand transition">Blogs</a>
+            <i class="fas fa-chevron-right text-[8px]"></i>
+            <span class="text-gray-400" id="crumbLabel">Editor</span>
+          </nav>
+
+          <div class="mb-8">
+            <div class="eyebrow mb-4" id="editorMode">Blog Editor</div>
+            <h1 class="text-3xl sm:text-4xl font-bold mb-2">
+              Blog <span class="gradient-text">Editor</span>
+            </h1>
+            <p class="text-gray-400 text-sm">Write it, tag it, publish it.</p>
+          </div>
+
+          <form id="blogForm" class="space-y-5">
+            <section class="glass p-6 sm:p-7 space-y-5">
+              <h2 class="text-base font-bold pb-4 border-b border-white/10">
+                <i class="fas fa-pen-nib text-brand text-sm mr-2"></i> Content
+              </h2>
+
+              <div>
+                <label class="field-label" for="title">Title</label>
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  required
+                  class="field"
+                  placeholder="Blog post title"
+                >
+              </div>
+
+              <div>
+                <label class="field-label" for="excerpt">Excerpt</label>
+                <textarea
+                  id="excerpt"
+                  name="excerpt"
+                  rows="2"
+                  class="field"
+                  placeholder="Brief excerpt"
+                ></textarea>
+                <p class="field-hint">Shown on cards and previews across the site.</p>
+              </div>
+
+              <div>
+                <label class="field-label" for="content">Content</label>
+                <textarea
+                  id="content"
+                  name="content"
+                  rows="12"
+                  required
+                  class="field font-mono text-sm !leading-relaxed"
+                  placeholder="Blog content (HTML supported)"
+                ></textarea>
+                <p class="field-hint"><i class="fas fa-circle-info mr-1"></i> HTML is supported.</p>
+              </div>
+            </section>
+
+            <section class="glass p-6 sm:p-7 space-y-5">
+              <h2 class="text-base font-bold pb-4 border-b border-white/10">
+                <i class="fas fa-tags text-brand text-sm mr-2"></i> Metadata
+              </h2>
+
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label class="field-label" for="category">Category</label>
+                  <input
+                    type="text"
+                    id="category"
+                    name="category"
+                    class="field"
+                    placeholder="e.g., Technology"
+                  >
+                </div>
+
+                <div>
+                  <label class="field-label" for="author">Author</label>
+                  <input
+                    type="text"
+                    id="author"
+                    name="author"
+                    class="field"
+                    placeholder="Author name"
+                  >
+                </div>
+
+                <div>
+                  <label class="field-label" for="tags">Tags</label>
+                  <input
+                    type="text"
+                    id="tags"
+                    name="tags"
+                    class="field"
+                    placeholder="Comma separated"
+                  >
+                </div>
+              </div>
+
+              <div>
+                <label class="field-label" for="image">Featured Image</label>
+
+                <label class="upload-drop grid place-items-center py-6 px-4 cursor-pointer text-center mb-3" data-drop>
+                  <input type="file" accept="image/*" class="hidden" data-file>
+                  <i class="fas fa-cloud-arrow-up text-xl text-gray-600 mb-2"></i>
+                  <span class="text-sm text-gray-400">Drop an image or <span class="text-brand font-semibold">browse</span></span>
+                  <span class="block text-[11px] text-gray-600 mt-1">JPEG, PNG, WebP, GIF or AVIF &middot; max 8MB</span>
+                  <span class="block text-xs mt-2" data-status></span>
+                </label>
+
+                <input
+                  type="url"
+                  id="image"
+                  name="image"
+                  class="field"
+                  placeholder="...or paste an image URL"
+                >
+                <div id="imagePreview" class="hidden mt-3">
+                  <img src="" alt="Featured image preview" class="h-32 w-full max-w-xs object-cover rounded-xl border border-white/10">
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between gap-4 p-4 rounded-xl border border-white/10 bg-white/[0.02]">
+                <div>
+                  <label class="flex items-center gap-3 cursor-pointer" for="published">
+                    <input type="checkbox" id="published" name="published" checked class="checkbox">
+                    <span class="text-sm font-semibold text-white">Published</span>
+                  </label>
+                  <p class="field-hint ml-8">Uncheck to save as a draft, hidden from the public site.</p>
+                </div>
+                <i class="fas fa-globe text-gray-700 text-xl shrink-0"></i>
+              </div>
+            </section>
+
+            <div id="message" class="hidden p-3.5 rounded-xl text-sm"></div>
+
+            <div class="flex flex-wrap gap-3 pb-4">
+              <button type="submit" id="saveBtn" class="primary-btn !py-2.5 !px-6 text-sm">
+                <i class="fas fa-floppy-disk text-xs"></i>
+                <span id="saveLabel">Save Blog</span>
+              </button>
+              <a href="/admin/blogs" class="ghost-btn !py-2.5 !px-6 text-sm">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const blogId = "<%= typeof blogId !== "undefined" ? blogId : "" %>";
+    const messageDiv = document.getElementById("message");
+
+    // Reflect create vs. edit in the chrome.
+    if (blogId) {
+      document.getElementById("editorMode").textContent = "Edit Post";
+      document.getElementById("crumbLabel").textContent = "Edit Post";
+    } else {
+      document.getElementById("editorMode").textContent = "New Post";
+      document.getElementById("crumbLabel").textContent = "New Post";
+    }
+
+    // Live preview for the featured image.
+    (() => {
+      const input = document.getElementById("image");
+      const wrap = document.getElementById("imagePreview");
+      const img = wrap.querySelector("img");
+      const sync = () => {
+        const val = input.value.trim();
+        if (val) {
+          img.src = val;
+          wrap.classList.remove("hidden");
+        } else {
+          wrap.classList.add("hidden");
+        }
+      };
+      input.addEventListener("input", sync);
+      img.addEventListener("error", () => wrap.classList.add("hidden"));
+      window.syncImagePreview = sync;
+    })();
+
+    // Load blog if editing
+    if (blogId) {
+      fetch(`/api/blogs/all`)
+        .then(res => res.json())
+        .then(blogs => {
+          const blog = blogs.find(b => b.id === blogId);
+          if (blog) {
+            document.getElementById("title").value = blog.title;
+            document.getElementById("excerpt").value = blog.excerpt || "";
+            document.getElementById("content").value = blog.content;
+            document.getElementById("category").value = blog.category || "";
+            document.getElementById("author").value = blog.author || "";
+            document.getElementById("tags").value = (blog.tags || []).join(",");
+            document.getElementById("image").value = blog.image || "";
+            document.getElementById("published").checked = blog.published;
+            window.syncImagePreview();
+          }
+        });
+    }
+
+    document.getElementById("blogForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const saveBtn = document.getElementById("saveBtn");
+      const saveLabel = document.getElementById("saveLabel");
+
+      const formData = {
+        title: document.getElementById("title").value,
+        excerpt: document.getElementById("excerpt").value,
+        content: document.getElementById("content").value,
+        category: document.getElementById("category").value,
+        author: document.getElementById("author").value,
+        tags: document.getElementById("tags").value,
+        image: document.getElementById("image").value,
+        published: document.getElementById("published").checked
+      };
+
+      saveBtn.disabled = true;
+      saveLabel.textContent = "Saving...";
+
+      try {
+        const url = blogId ? `/api/blogs/${blogId}` : "/api/blogs";
+        const method = blogId ? "PUT" : "POST";
+
+        const response = await fetch(url, {
+          method,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+          messageDiv.className = "p-3.5 rounded-xl text-sm bg-green-500/10 border border-green-500/30 text-green-400";
+          messageDiv.textContent = "Blog saved successfully!";
+          messageDiv.classList.remove("hidden");
+          setTimeout(() => window.location.href = "/admin/blogs", 1500);
+        } else {
+          messageDiv.className = "p-3.5 rounded-xl text-sm bg-brand/10 border border-brand/30 text-brand-light";
+          messageDiv.textContent = "Error saving blog";
+          messageDiv.classList.remove("hidden");
+          saveBtn.disabled = false;
+          saveLabel.textContent = "Save Blog";
+        }
+      } catch (error) {
+        messageDiv.className = "p-3.5 rounded-xl text-sm bg-brand/10 border border-brand/30 text-brand-light";
+        messageDiv.textContent = "Error: " + error.message;
+        messageDiv.classList.remove("hidden");
+        saveBtn.disabled = false;
+        saveLabel.textContent = "Save Blog";
+      }
+    });
+  </script>
+  <script>
+    // Uploads the chosen file to Cloudinary via /api/upload, then writes the returned URL
+    // into the existing #image field so the normal save path stays unchanged.
+    (() => {
+      const drop = document.querySelector("[data-drop]");
+      if (!drop) return;
+      const fileInput = drop.querySelector("[data-file]");
+      const status = drop.querySelector("[data-status]");
+      const urlInput = document.getElementById("image");
+
+      const setStatus = (text, tone) => {
+        status.textContent = text;
+        status.className = "block text-xs mt-2 " +
+          (tone === "error" ? "text-brand-light" : tone === "ok" ? "text-green-400" : "text-gray-400");
+      };
+
+      const upload = async (file) => {
+        if (!file) return;
+        setStatus("Uploading " + file.name + "...", "info");
+
+        try {
+          const form = new FormData();
+          form.append("image", file);
+
+          const res = await fetch("/api/upload", { method: "POST", body: form });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.message || "Upload failed");
+
+          urlInput.value = data.url;
+          // Let any existing preview listener react to the new value.
+          urlInput.dispatchEvent(new Event("input", { bubbles: true }));
+          setStatus("Uploaded (" + Math.round(data.bytes / 1024) + " KB). Remember to save.", "ok");
+        } catch (error) {
+          setStatus(error.message, "error");
+        }
+      };
+
+      fileInput.addEventListener("change", (e) => upload(e.target.files[0]));
+
+      ["dragenter", "dragover"].forEach((ev) =>
+        drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add("dragover"); }));
+      ["dragleave", "drop"].forEach((ev) =>
+        drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.remove("dragover"); }));
+      drop.addEventListener("drop", (e) => upload(e.dataTransfer.files[0]));
+    })();
+  </script>
+</body>
+</html>
