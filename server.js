@@ -89,6 +89,32 @@ app.get("/services", (req, res) => {
   res.render("services");
 });
 
+// Individual service pages (content per SEO PDF). Keys must match the navbar dropdown
+// and footer links; a bad slug 404s rather than rendering a missing template.
+const SERVICE_PAGES = {
+  "digital-marketing": "services/digital-marketing",
+  "seo-services": "services/seo-services",
+  "branding": "services/branding",
+  "ai-solutions": "services/ai-solutions",
+  "software-development": "services/software-development",
+  "web-development": "services/web-development",
+  "digital-transformation": "services/digital-transformation",
+};
+
+app.get("/services/:slug", (req, res, next) => {
+  const view = SERVICE_PAGES[req.params.slug];
+  if (!view) return next();
+  res.render(view);
+});
+
+app.get("/industries", (req, res) => {
+  res.render("industries");
+});
+
+app.get("/case-studies", (req, res) => {
+  res.render("case-studies");
+});
+
 app.get("/team", (req, res) => {
   res.render("team");
 });

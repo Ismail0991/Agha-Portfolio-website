@@ -1,47 +1,90 @@
 <nav id="siteNav" class="sticky top-0 z-50 border-b border-white/10 bg-ink-900/70 backdrop-blur-xl">
   <div class="max-w-7xl mx-auto px-4">
     <div class="flex justify-between items-center h-16">
-      <a href="/" class="flex items-center gap-2.5 group">
-        <span class="grid place-items-center w-9 h-9 rounded-xl bg-brand/15 border border-brand/30 text-brand group-hover:bg-brand/25 transition">
-          <i class="fas fa-rocket"></i>
+      <a href="/" class="flex items-center gap-2.5 group" aria-label="Aghaz Digital home">
+        <!-- Official Aghaz "A" mark: white background keyed out to transparency so it sits
+             cleanly on the dark theme (source: public/images/aghaz-mark.png). -->
+        <img src="/images/aghaz-mark.png" alt="Aghaz Digital" width="36" height="36"
+             class="shrink-0 w-9 h-9 object-contain">
+        <span class="flex flex-col leading-none">
+          <span class="text-lg font-bold font-display tracking-tight">
+            <span class="text-white">Aghaz</span> <span class="text-brand">Digital</span>
+          </span>
+          <span class="text-[9px] tracking-[0.22em] text-gray-500 uppercase font-display font-medium mt-0.5">Start. Grow. Succeed.</span>
         </span>
-        <span class="text-lg font-bold font-display tracking-tight">DigitalHub</span>
       </a>
 
-      <div class="hidden md:flex items-center gap-1">
+      <div class="hidden lg:flex items-center gap-1">
         <a href="/" class="px-3 py-2 text-sm text-gray-300 hover:text-white rounded-lg hover:bg-white/5 transition">Home</a>
         <a href="/about" class="px-3 py-2 text-sm text-gray-300 hover:text-white rounded-lg hover:bg-white/5 transition">About</a>
-        <a href="/services" class="px-3 py-2 text-sm text-gray-300 hover:text-white rounded-lg hover:bg-white/5 transition">Services</a>
-        <a href="/team" class="px-3 py-2 text-sm text-gray-300 hover:text-white rounded-lg hover:bg-white/5 transition">Team</a>
+
+        <!-- Services dropdown (hover on desktop, opened via CSS group-hover + focus-within) -->
+        <div class="relative group">
+          <a href="/services" class="px-3 py-2 text-sm text-gray-300 hover:text-white rounded-lg hover:bg-white/5 transition inline-flex items-center gap-1.5">
+            Services <i class="fas fa-chevron-down text-[10px] mt-0.5 transition-transform group-hover:rotate-180"></i>
+          </a>
+          <div class="absolute left-0 top-full pt-2 w-64 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-150">
+            <div class="glass !rounded-xl p-2 bg-ink-800/95 border border-white/10 shadow-2xl">
+              <a href="/services/digital-marketing" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-300 hover:text-white hover:bg-white/5 transition"><i class="fas fa-bullhorn text-brand w-4 text-center"></i> Digital Marketing</a>
+              <a href="/services/seo-services" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-300 hover:text-white hover:bg-white/5 transition"><i class="fas fa-magnifying-glass-chart text-brand w-4 text-center"></i> SEO Services</a>
+              <a href="/services/branding" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-300 hover:text-white hover:bg-white/5 transition"><i class="fas fa-fingerprint text-brand w-4 text-center"></i> Branding</a>
+              <a href="/services/ai-solutions" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-300 hover:text-white hover:bg-white/5 transition"><i class="fas fa-robot text-brand w-4 text-center"></i> AI Solutions</a>
+              <a href="/services/software-development" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-300 hover:text-white hover:bg-white/5 transition"><i class="fas fa-code text-brand w-4 text-center"></i> Software Development</a>
+              <a href="/services/web-development" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-300 hover:text-white hover:bg-white/5 transition"><i class="fas fa-display text-brand w-4 text-center"></i> Web Development</a>
+              <a href="/services/digital-transformation" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-300 hover:text-white hover:bg-white/5 transition"><i class="fas fa-arrows-spin text-brand w-4 text-center"></i> Digital Transformation</a>
+              <div class="my-1 border-t border-white/10"></div>
+              <a href="/services" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-brand font-semibold hover:bg-white/5 transition"><i class="fas fa-layer-group w-4 text-center"></i> All Services</a>
+            </div>
+          </div>
+        </div>
+
+        <a href="/industries" class="px-3 py-2 text-sm text-gray-300 hover:text-white rounded-lg hover:bg-white/5 transition">Industries</a>
+        <a href="/case-studies" class="px-3 py-2 text-sm text-gray-300 hover:text-white rounded-lg hover:bg-white/5 transition">Case Studies</a>
         <a href="/blog" class="px-3 py-2 text-sm text-gray-300 hover:text-white rounded-lg hover:bg-white/5 transition">Blog</a>
-        <a href="/careers" class="px-3 py-2 text-sm text-gray-300 hover:text-white rounded-lg hover:bg-white/5 transition">Careers</a>
       </div>
 
-      <div class="hidden md:flex items-center">
+      <div class="hidden lg:flex items-center">
         <a href="/contact" class="primary-btn !px-4 !py-2 !text-sm">
-          Let's Talk <i class="fas fa-arrow-right text-xs"></i>
+          Request a Consultation <i class="fas fa-arrow-right text-xs"></i>
         </a>
       </div>
 
-      <!-- There was previously no mobile navigation: the links were hidden below md with
-           nothing to replace them, so phone users had no way to move around the site. -->
       <button id="navToggle" type="button"
-              class="md:hidden grid place-items-center w-10 h-10 rounded-lg border border-white/10 bg-white/5 text-white"
+              class="lg:hidden grid place-items-center w-10 h-10 rounded-lg border border-white/10 bg-white/5 text-white"
               aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobileMenu">
         <i class="fas fa-bars" id="navToggleIcon"></i>
       </button>
     </div>
   </div>
 
-  <div id="mobileMenu" class="md:hidden hidden border-t border-white/10 bg-ink-900/95 backdrop-blur-xl">
+  <div id="mobileMenu" class="lg:hidden hidden border-t border-white/10 bg-ink-900/95 backdrop-blur-xl max-h-[80vh] overflow-y-auto">
     <div class="px-4 py-3 space-y-1">
       <a href="/" class="block px-3 py-2.5 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition">Home</a>
       <a href="/about" class="block px-3 py-2.5 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition">About</a>
-      <a href="/services" class="block px-3 py-2.5 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition">Services</a>
-      <a href="/team" class="block px-3 py-2.5 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition">Team</a>
+
+      <!-- Services accordion on mobile -->
+      <div>
+        <button id="mobileServicesToggle" type="button" class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition" aria-expanded="false" aria-controls="mobileServices">
+          <span>Services</span>
+          <i class="fas fa-chevron-down text-xs transition-transform" id="mobileServicesIcon"></i>
+        </button>
+        <div id="mobileServices" class="hidden pl-3 mt-1 space-y-0.5 border-l border-white/10 ml-3">
+          <a href="/services/digital-marketing" class="block px-3 py-2 rounded-lg text-sm text-gray-400 hover:text-white hover:bg-white/5 transition">Digital Marketing</a>
+          <a href="/services/seo-services" class="block px-3 py-2 rounded-lg text-sm text-gray-400 hover:text-white hover:bg-white/5 transition">SEO Services</a>
+          <a href="/services/branding" class="block px-3 py-2 rounded-lg text-sm text-gray-400 hover:text-white hover:bg-white/5 transition">Branding</a>
+          <a href="/services/ai-solutions" class="block px-3 py-2 rounded-lg text-sm text-gray-400 hover:text-white hover:bg-white/5 transition">AI Solutions</a>
+          <a href="/services/software-development" class="block px-3 py-2 rounded-lg text-sm text-gray-400 hover:text-white hover:bg-white/5 transition">Software Development</a>
+          <a href="/services/web-development" class="block px-3 py-2 rounded-lg text-sm text-gray-400 hover:text-white hover:bg-white/5 transition">Web Development</a>
+          <a href="/services/digital-transformation" class="block px-3 py-2 rounded-lg text-sm text-gray-400 hover:text-white hover:bg-white/5 transition">Digital Transformation</a>
+          <a href="/services" class="block px-3 py-2 rounded-lg text-sm text-brand font-semibold hover:bg-white/5 transition">All Services</a>
+        </div>
+      </div>
+
+      <a href="/industries" class="block px-3 py-2.5 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition">Industries</a>
+      <a href="/case-studies" class="block px-3 py-2.5 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition">Case Studies</a>
       <a href="/blog" class="block px-3 py-2.5 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition">Blog</a>
       <a href="/careers" class="block px-3 py-2.5 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition">Careers</a>
-      <a href="/contact" class="primary-btn w-full mt-2">Let's Talk</a>
+      <a href="/contact" class="primary-btn w-full mt-2">Request a Consultation</a>
     </div>
   </div>
 </nav>
@@ -58,11 +101,21 @@
       icon.className = open ? "fas fa-xmark" : "fas fa-bars";
     });
 
+    // Mobile Services accordion.
+    const sToggle = document.getElementById("mobileServicesToggle");
+    const sMenu = document.getElementById("mobileServices");
+    const sIcon = document.getElementById("mobileServicesIcon");
+    sToggle.addEventListener("click", () => {
+      const open = !sMenu.classList.toggle("hidden");
+      sToggle.setAttribute("aria-expanded", String(open));
+      sIcon.classList.toggle("rotate-180", open);
+    });
+
     // Mark the current page in both menus.
     const path = window.location.pathname;
     document.querySelectorAll("#siteNav a[href^='/']").forEach((a) => {
       const href = a.getAttribute("href");
-      const active = href === "/" ? path === "/" : path.startsWith(href);
+      const active = href === "/" ? path === "/" : path === href || path.startsWith(href + "/");
       if (active && !a.classList.contains("primary-btn")) a.classList.add("nav-active");
     });
   })();

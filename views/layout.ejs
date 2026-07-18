@@ -3,23 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= typeof title !== "undefined" ? title : "DigitalHub - Digital Solutions That Empower Businesses" %></title>
-  <meta name="description" content="DigitalHub builds web, mobile, marketing and automation solutions that drive real business results.">
+  <title><%= typeof title !== "undefined" ? title : "Aghaz Digital | Marketing, AI, Software & Branding Agency" %></title>
+  <meta name="description" content="<%= typeof description !== 'undefined' ? description : 'Aghaz Digital builds the marketing, brand, AI, and software a growing business actually needs — one accountable team, scoped around your goals, not a template.' %>">
+  <link rel="icon" type="image/png" href="/images/favicon.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script>
+    // Aghaz Digital brand palette: teal #14B8A6 / deep teal #0F766E / blue #3B82F6
+    // on navy #0F172A / #1E293B. Poppins display, Inter body.
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            ink: { 900: "#07070b", 800: "#0d0d14", 700: "#14141d", 600: "#1c1c28" },
-            brand: { DEFAULT: "#ef4444", dark: "#dc2626", light: "#f87171" },
+            ink: { 900: "#0A0F1C", 800: "#0F172A", 700: "#1E293B", 600: "#293548" },
+            brand: { DEFAULT: "#14B8A6", dark: "#0F766E", light: "#2DD4BF", blue: "#3B82F6" },
           },
           fontFamily: {
-            display: ["Sora", "system-ui", "sans-serif"],
+            display: ["Poppins", "system-ui", "sans-serif"],
             sans: ["Inter", "system-ui", "sans-serif"],
           },
         },
@@ -28,23 +31,24 @@
   </script>
   <style>
     :root {
-      --primary: #ef4444;
-      --primary-dark: #dc2626;
-      --ink: #07070b;
+      --primary: #14b8a6;
+      --primary-dark: #0f766e;
+      --accent-blue: #3b82f6;
+      --ink: #0a0f1c;
       --surface: rgba(255, 255, 255, 0.035);
       --border: rgba(255, 255, 255, 0.09);
     }
 
     body {
       background: var(--ink);
-      color: #e7e7ea;
+      color: #e6edf3;
       font-family: "Inter", system-ui, sans-serif;
       -webkit-font-smoothing: antialiased;
     }
 
-    h1, h2, h3, h4 { font-family: "Sora", system-ui, sans-serif; letter-spacing: -0.02em; }
+    h1, h2, h3, h4 { font-family: "Poppins", system-ui, sans-serif; letter-spacing: -0.02em; }
 
-    /* Ambient red glow behind the page, fixed so sections drift over it. */
+    /* Ambient teal/blue glow behind the page, fixed so sections drift over it. */
     body::before {
       content: "";
       position: fixed;
@@ -52,8 +56,8 @@
       pointer-events: none;
       z-index: 0;
       background:
-        radial-gradient(60rem 40rem at 75% -10%, rgba(239, 68, 68, 0.13), transparent 60%),
-        radial-gradient(45rem 35rem at 5% 15%, rgba(239, 68, 68, 0.06), transparent 55%);
+        radial-gradient(60rem 40rem at 78% -10%, rgba(20, 184, 166, 0.14), transparent 60%),
+        radial-gradient(45rem 35rem at 3% 12%, rgba(59, 130, 246, 0.08), transparent 55%);
     }
     body > * { position: relative; z-index: 1; }
 
@@ -63,19 +67,19 @@
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      background: linear-gradient(180deg, var(--primary), var(--primary-dark));
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       color: #fff;
       padding: 0.8rem 1.6rem;
       border-radius: 0.75rem;
       font-weight: 600;
       border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: 0 8px 24px -8px rgba(239, 68, 68, 0.65);
+      box-shadow: 0 8px 24px -8px rgba(20, 184, 166, 0.6);
       transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
       cursor: pointer;
     }
     .primary-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 14px 32px -8px rgba(239, 68, 68, 0.8);
+      box-shadow: 0 14px 32px -8px rgba(20, 184, 166, 0.75);
       filter: brightness(1.06);
     }
 
@@ -109,7 +113,7 @@
     }
     .glass:hover {
       transform: translateY(-4px);
-      border-color: rgba(239, 68, 68, 0.4);
+      border-color: rgba(20, 184, 166, 0.42);
       background: rgba(255, 255, 255, 0.06);
     }
 
@@ -122,8 +126,8 @@
       justify-content: center;
       color: var(--primary);
       font-size: 1.15rem;
-      background: rgba(239, 68, 68, 0.12);
-      border: 1px solid rgba(239, 68, 68, 0.28);
+      background: rgba(20, 184, 166, 0.12);
+      border: 1px solid rgba(20, 184, 166, 0.28);
     }
 
     .eyebrow {
@@ -137,12 +141,12 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--primary);
-      background: rgba(239, 68, 68, 0.1);
-      border: 1px solid rgba(239, 68, 68, 0.25);
+      background: rgba(20, 184, 166, 0.1);
+      border: 1px solid rgba(20, 184, 166, 0.25);
     }
 
     .gradient-text {
-      background: linear-gradient(120deg, #fff 15%, var(--primary) 55%, #fca5a5 90%);
+      background: linear-gradient(120deg, #fff 10%, var(--primary) 50%, var(--accent-blue) 95%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -188,11 +192,11 @@
       html { scroll-behavior: auto; }
     }
 
-    ::selection { background: rgba(239, 68, 68, 0.35); }
+    ::selection { background: rgba(20, 184, 166, 0.35); }
     ::-webkit-scrollbar { width: 10px; }
-    ::-webkit-scrollbar-track { background: #0b0b12; }
-    ::-webkit-scrollbar-thumb { background: #2a2a38; border-radius: 999px; }
-    ::-webkit-scrollbar-thumb:hover { background: #3a3a4d; }
+    ::-webkit-scrollbar-track { background: #0a0f1c; }
+    ::-webkit-scrollbar-thumb { background: #29374d; border-radius: 999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3a4a63; }
   </style>
 </head>
 <body>
