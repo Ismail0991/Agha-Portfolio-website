@@ -43,17 +43,25 @@
         <a href="/blog" class="px-3 py-2 text-sm text-gray-300 hover:text-white rounded-lg hover:bg-white/5 transition">Blog</a>
       </div>
 
-      <div class="hidden lg:flex items-center">
+      <div class="hidden lg:flex items-center gap-2">
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle light and dark mode">
+          <i class="fas fa-sun"></i>
+        </button>
         <a href="/contact" class="primary-btn !px-4 !py-2 !text-sm">
           Request a Consultation <i class="fas fa-arrow-right text-xs"></i>
         </a>
       </div>
 
-      <button id="navToggle" type="button"
-              class="lg:hidden grid place-items-center w-10 h-10 rounded-lg border border-white/10 bg-white/5 text-white"
-              aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobileMenu">
-        <i class="fas fa-bars" id="navToggleIcon"></i>
-      </button>
+      <div class="lg:hidden flex items-center gap-2">
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle light and dark mode">
+          <i class="fas fa-sun"></i>
+        </button>
+        <button id="navToggle" type="button"
+                class="grid place-items-center w-10 h-10 rounded-lg border border-white/10 bg-white/5"
+                aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobileMenu">
+          <i class="fas fa-bars" id="navToggleIcon"></i>
+        </button>
+      </div>
     </div>
   </div>
 

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>(function(){try{var t=localStorage.getItem("theme");document.documentElement.setAttribute("data-theme",t==="light"?"light":"dark");}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Login - Aghaz Digital</title>
@@ -11,6 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
@@ -28,22 +30,56 @@
     };
   </script>
   <style>
-    :root {
+    /* ===== Theme tokens ===== brand teal is shared; everything else flips. */
+    :root, :root[data-theme="dark"] {
       --primary: #14b8a6;
       --primary-dark: #0f766e;
-      --ink: #0a0f1c;
+      --accent-blue: #3b82f6;
+      --bg: #0a0f1c;
+      --text: #cbd5e1;
+      --text-strong: #ffffff;
+      --text-muted: #94a3b8;
       --surface: rgba(255, 255, 255, 0.035);
+      --surface-2: rgba(255, 255, 255, 0.06);
       --border: rgba(255, 255, 255, 0.09);
+      --brand-text: #2dd4bf;
+      --nav-bg: rgba(10, 15, 28, 0.7);
+      --elevated: rgba(15, 23, 42, 0.95);
+      --grid-line: rgba(255, 255, 255, 0.035);
+      --track: #0a0f1c;
+      --thumb: #29374d;
+      --thumb-hover: #3a4a63;
+      --glow-1: rgba(20, 184, 166, 0.14);
+      --glow-2: rgba(59, 130, 246, 0.08);
+    }
+    :root[data-theme="light"] {
+      --bg: #f1f5f9;
+      --text: #475569;
+      --text-strong: #0f172a;
+      --text-muted: #64748b;
+      --surface: rgba(15, 23, 42, 0.035);
+      --surface-2: rgba(15, 23, 42, 0.07);
+      --border: rgba(15, 23, 42, 0.12);
+      --brand-text: #0f766e;
+      --nav-bg: rgba(241, 245, 249, 0.82);
+      --elevated: rgba(255, 255, 255, 0.97);
+      --grid-line: rgba(15, 23, 42, 0.05);
+      --track: #e2e8f0;
+      --thumb: #cbd5e1;
+      --thumb-hover: #94a3b8;
+      --glow-1: rgba(20, 184, 166, 0.1);
+      --glow-2: rgba(59, 130, 246, 0.07);
     }
 
     body {
-      background: var(--ink);
-      color: #e7e7ea;
+      background: var(--bg);
+      color: var(--text);
       font-family: "Inter", system-ui, sans-serif;
       -webkit-font-smoothing: antialiased;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
-    h1, h2, h3, h4 { font-family: "Poppins", system-ui, sans-serif; letter-spacing: -0.02em; }
+    h1, h2, h3, h4 { font-family: "Poppins", system-ui, sans-serif; letter-spacing: -0.02em; color: var(--text-strong); }
 
     body::before {
       content: "";
@@ -52,8 +88,8 @@
       pointer-events: none;
       z-index: 0;
       background:
-        radial-gradient(60rem 40rem at 75% -10%, rgba(20, 184, 166, 0.13), transparent 60%),
-        radial-gradient(45rem 35rem at 5% 15%, rgba(20, 184, 166, 0.06), transparent 55%);
+        radial-gradient(60rem 40rem at 75% -10%, var(--glow-1), transparent 60%),
+        radial-gradient(45rem 35rem at 5% 15%, var(--glow-2), transparent 55%);
     }
     body > * { position: relative; z-index: 1; }
 
@@ -87,7 +123,7 @@
       padding: 0.8rem 1.6rem;
       border-radius: 0.75rem;
       font-weight: 600;
-      color: #fff;
+      color: var(--text-strong);
       border: 1px solid var(--border);
       background: var(--surface);
       backdrop-filter: blur(8px);
@@ -95,8 +131,8 @@
       cursor: pointer;
     }
     .ghost-btn:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.22);
+      background: var(--surface-2);
+      border-color: var(--primary);
       transform: translateY(-2px);
     }
 
@@ -123,7 +159,7 @@
     }
 
     .gradient-text {
-      background: linear-gradient(120deg, #fff 15%, var(--primary) 55%, #2dd4bf 90%);
+      background: linear-gradient(120deg, var(--text-strong) 15%, var(--primary) 55%, #2dd4bf 90%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -131,24 +167,24 @@
 
     .field {
       width: 100%;
-      background: rgba(255, 255, 255, 0.04);
+      background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 0.7rem;
       padding: 0.75rem 1rem;
-      color: #fff;
+      color: var(--text-strong);
       transition: border-color 0.2s ease, background 0.2s ease;
     }
-    .field::placeholder { color: rgba(255, 255, 255, 0.35); }
+    .field::placeholder { color: var(--text-muted); }
     .field:focus {
       outline: none;
       border-color: var(--primary);
-      background: rgba(255, 255, 255, 0.07);
+      background: var(--surface-2);
     }
 
     .grid-bg {
       background-image:
-        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
       background-size: 56px 56px;
       mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 40%, transparent 100%);
       -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 40%, transparent 100%);
@@ -156,12 +192,39 @@
 
     ::selection { background: rgba(20, 184, 166, 0.35); }
     ::-webkit-scrollbar { width: 10px; }
-    ::-webkit-scrollbar-track { background: #0a0f1c; }
-    ::-webkit-scrollbar-thumb { background: #29374d; border-radius: 999px; }
-    ::-webkit-scrollbar-thumb:hover { background: #3a4a63; }
+    ::-webkit-scrollbar-track { background: var(--track); }
+    ::-webkit-scrollbar-thumb { background: var(--thumb); border-radius: 999px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--thumb-hover); }
+
+    /* Theme toggle button */
+    .theme-toggle {
+      display: grid; place-items: center; width: 38px; height: 38px; border-radius: 10px;
+      color: var(--text-strong); border: 1px solid var(--border); background: var(--surface);
+      cursor: pointer; transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+    .theme-toggle:hover { background: var(--surface-2); border-color: var(--primary); color: var(--primary); }
+
+    /* ===== Light-mode overrides for hardcoded Tailwind utilities used across pages ===== */
+    :root[data-theme="light"] .text-white { color: var(--text-strong) !important; }
+    :root[data-theme="light"] .text-gray-300,
+    :root[data-theme="light"] .text-gray-400 { color: var(--text) !important; }
+    :root[data-theme="light"] .text-gray-500,
+    :root[data-theme="light"] .text-gray-600 { color: var(--text-muted) !important; }
+    :root[data-theme="light"] .text-gray-700 { color: #cbd5e1 !important; }
+    :root[data-theme="light"] .text-brand { color: var(--brand-text) !important; }
+    :root[data-theme="light"] .border-white\/10,
+    :root[data-theme="light"] .border-white\/5 { border-color: var(--border) !important; }
+    :root[data-theme="light"] .bg-white\/5 { background-color: rgba(15, 23, 42, 0.05) !important; }
+    :root[data-theme="light"] .bg-white\/10 { background-color: rgba(15, 23, 42, 0.1) !important; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      [data-aos] { opacity: 1 !important; transform: none !important; transition: none !important; }
+    }
   </style>
 </head>
 <body class="font-sans">
+  <button type="button" class="theme-toggle fixed top-5 right-5 z-50" data-theme-toggle aria-label="Toggle light and dark mode"><i class="fas fa-sun"></i></button>
   <div class="fixed inset-0 grid-bg pointer-events-none"></div>
 
   <main class="min-h-screen flex items-center justify-center px-4 py-12">
@@ -173,7 +236,7 @@
         </a>
       </div>
 
-      <div class="glass p-8 sm:p-9 relative overflow-hidden">
+      <div class="glass p-8 sm:p-9 relative overflow-hidden" data-aos="fade-up">
         <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-72 h-72 bg-brand/20 blur-[90px] rounded-full pointer-events-none"></div>
 
         <div class="relative">
@@ -299,6 +362,46 @@
         submitLabel.textContent = "Sign In";
       }
     });
+  </script>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // ----- Theme toggle -----
+    (() => {
+      const root = document.documentElement;
+      const syncIcons = (t) => {
+        document.querySelectorAll("[data-theme-toggle] i").forEach((ic) => {
+          ic.className = t === "light" ? "fas fa-moon" : "fas fa-sun";
+        });
+      };
+      const apply = (t) => {
+        root.setAttribute("data-theme", t);
+        try { localStorage.setItem("theme", t); } catch (e) {}
+        syncIcons(t);
+        if (window.AOS) AOS.refresh();
+      };
+      syncIcons(root.getAttribute("data-theme"));
+      document.querySelectorAll("[data-theme-toggle]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          apply(root.getAttribute("data-theme") === "light" ? "dark" : "light");
+        });
+      });
+    })();
+
+    // ----- AOS scroll animations (replay on scroll), with a fail-safe -----
+    (() => {
+      const revealAll = () => {
+        const s = document.createElement("style");
+        s.textContent = "[data-aos]{opacity:1 !important;transform:none !important;}";
+        document.head.appendChild(s);
+      };
+      try {
+        if (window.AOS) {
+          AOS.init({ duration: 700, once: false, mirror: true, offset: 80, easing: "ease-out-cubic" });
+        } else { revealAll(); }
+      } catch (e) { revealAll(); }
+      setTimeout(() => { if (!window.AOS) revealAll(); }, 2500);
+    })();
   </script>
 </body>
 </html>

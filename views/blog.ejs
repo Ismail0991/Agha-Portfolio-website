@@ -4,21 +4,21 @@
 
   <div class="relative max-w-7xl mx-auto px-4 pt-20 pb-16 lg:pt-28 lg:pb-20">
     <div class="max-w-3xl">
-      <div class="eyebrow mb-6 reveal">
+      <div class="eyebrow mb-6" data-aos="fade-up">
         <span class="w-1.5 h-1.5 rounded-full bg-brand animate-pulse"></span>
         Insights
       </div>
 
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.08] mb-6 reveal">
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.08] mb-6" data-aos="fade-up">
         Practical insight, <span class="gradient-text">not filler content.</span>
       </h1>
 
-      <p class="text-lg text-gray-400 leading-relaxed max-w-xl mb-9 reveal">
+      <p class="text-lg text-gray-400 leading-relaxed max-w-xl mb-9" data-aos="fade-up">
         Straightforward guides on marketing, branding, AI, and technology — written for
         people running a business, not other marketers.
       </p>
 
-      <div class="flex flex-wrap gap-3 reveal">
+      <div class="flex flex-wrap gap-3" data-aos="fade-up">
         <a href="#posts" class="primary-btn">
           Browse the Blog <i class="fas fa-arrow-down text-xs"></i>
         </a>
@@ -27,7 +27,7 @@
         </a>
       </div>
 
-      <p class="text-sm text-gray-500 leading-relaxed max-w-xl mt-9 reveal">
+      <p class="text-sm text-gray-500 leading-relaxed max-w-xl mt-9" data-aos="fade-up">
         Every post here is written to answer a real question a business owner or founder
         is actually asking — not to hit a keyword quota.
       </p>
@@ -61,7 +61,7 @@
 <!-- ============================== CTA ============================== -->
 <section class="pb-24">
   <div class="max-w-7xl mx-auto px-4">
-    <div class="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-ink-700 to-ink-900 px-8 py-16 sm:px-16 sm:py-20 text-center reveal">
+    <div class="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-ink-700 to-ink-900 px-8 py-16 sm:px-16 sm:py-20 text-center" data-aos="fade-up">
       <div class="absolute inset-0 grid-bg opacity-60 pointer-events-none"></div>
       <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[36rem] h-[36rem] bg-brand/20 blur-[100px] rounded-full pointer-events-none"></div>
 
@@ -161,9 +161,7 @@
 
         filters.innerHTML = cats.map((c, i) => `
           <button type="button" data-cat="${escape(c)}"
-                  class="blog-filter px-4 py-1.5 rounded-full text-sm font-medium border transition ${
-                    i === 0
-                      ? "bg-brand/15 border-brand/40 text-brand"
+                  class="blog-filter px-4 py-1.5 rounded-full text-sm font-medium border transition ${ i === 0 ?"bg-brand/15 border-brand/40 text-brand"
                       : "bg-white/[0.03] border-white/10 text-gray-400 hover:text-white hover:border-white/25"
                   }">${escape(c)}</button>`).join("");
 
