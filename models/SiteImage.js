@@ -8,21 +8,21 @@ const COLLECTION = "siteImages";
 const SLOTS = [
   {
     key: "home.hero",
-    label: "Home - Hero Image",
-    description: "The large image beside the headline on the landing page.",
-    default: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80",
+    label: "Home - About Gallery (3rd image)",
+    description: "One of the three images in the About collage on the home page.",
+    default: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80",
   },
   {
     key: "about.story",
     label: "About - Our Story",
-    description: "The image in the 'We Are DigitalHub' section.",
-    default: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600",
+    description: "First image in the About collage (home) and the About page.",
+    default: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=700&q=80",
   },
   {
     key: "about.culture",
     label: "About - Team Culture",
-    description: "The image in the team culture section.",
-    default: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600",
+    description: "Second image in the About collage (home) and the About page.",
+    default: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80",
   },
   {
     key: "blog.fallback",
