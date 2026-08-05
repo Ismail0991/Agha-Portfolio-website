@@ -9,6 +9,8 @@ const { initializeFirebase, verifyFirebaseCredential } = require("./config/datab
 const { initializeCloudinary, verifyCloudinaryCredential } = require("./config/cloudinary");
 const { pageAuth } = require("./middleware/auth");
 const { siteImages } = require("./middleware/siteImages");
+const { siteTheme } = require("./middleware/siteTheme");
+const { siteContent } = require("./middleware/siteContent");
 const { startKeepAlive } = require("./config/keepAlive");
 
 const app = express();
@@ -47,6 +49,13 @@ app.set("layout", "layout");
 
 // Exposes res.locals.siteImages to every view so admin-managed images render server-side.
 app.use(siteImages);
+
+// Exposes res.locals.siteTheme (dark|light) so the admin-chosen theme is applied
+// server-side to every page -- there is no per-visitor toggle.
+app.use(siteTheme);
+
+// Exposes res.locals.content (editable landing-page text/icons/links) to every render.
+app.use(siteContent);
 
 // Responses carried an ETag but no Cache-Control, which leaves caching to the browser's
 // heuristics -- so a back/forward or repeat navigation could reuse a stale response
@@ -162,6 +171,10 @@ app.get("/admin/team", pageAuth, (req, res) => {
 
 app.get("/admin/site-images", pageAuth, (req, res) => {
   res.render("admin/site-images", { layout: false });
+});
+
+app.get("/admin/landing", pageAuth, (req, res) => {
+  res.render("admin/site-content", { layout: false });
 });
 
 app.get("/admin/team/new", pageAuth, (req, res) => {

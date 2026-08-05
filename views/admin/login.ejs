@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>(function(){try{var t=localStorage.getItem("theme");document.documentElement.setAttribute("data-theme",t==="light"?"light":"dark");}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>
+  <script>document.documentElement.setAttribute("data-theme","<%= typeof siteTheme !== 'undefined' ? siteTheme : 'dark' %>");</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Login - Aghaz Digital</title>
+  <title>Admin Login - Aghaz Tech</title>
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" type="image/png" href="/images/favicon.png">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -224,15 +224,14 @@
   </style>
 </head>
 <body class="font-sans">
-  <button type="button" class="theme-toggle fixed top-5 right-5 z-50" data-theme-toggle aria-label="Toggle light and dark mode"><i class="fas fa-sun"></i></button>
   <div class="fixed inset-0 grid-bg pointer-events-none"></div>
 
   <main class="min-h-screen flex items-center justify-center px-4 py-12">
     <div class="w-full max-w-md">
       <div class="text-center mb-8">
         <a href="/" class="inline-flex items-center gap-2.5 text-2xl font-bold font-display text-white hover:opacity-90 transition">
-          <img src="/images/aghaz-mark.png" alt="Aghaz Digital" class="w-10 h-10 object-contain shrink-0">
-          Aghaz Digital
+          <img src="/images/aghaz-mark.png" alt="Aghaz Tech" class="w-10 h-10 object-contain shrink-0">
+          Aghaz Tech
         </a>
       </div>
 
@@ -376,7 +375,7 @@
       };
       const apply = (t) => {
         root.setAttribute("data-theme", t);
-        try { localStorage.setItem("theme", t); } catch (e) {}
+        fetch("/api/site/theme", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ theme: t }) }).catch(() => {});
         syncIcons(t);
         if (window.AOS) AOS.refresh();
       };

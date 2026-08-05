@@ -1,16 +1,16 @@
 <nav id="siteNav" class="sticky top-0 z-50 border-b border-white/10 bg-ink-900/70 backdrop-blur-xl">
   <div class="max-w-7xl mx-auto px-4">
     <div class="flex justify-between items-center h-16">
-      <a href="/" class="flex items-center gap-2.5 group" aria-label="Aghaz Digital home">
+      <a href="/" class="flex items-center gap-2.5 group" aria-label="Aghaz Tech home">
         <!-- Official Aghaz "A" mark: white background keyed out to transparency so it sits
              cleanly on the dark theme (source: public/images/aghaz-mark.png). -->
-        <img src="/images/aghaz-mark.png" alt="Aghaz Digital" width="36" height="36"
+        <img src="<%= typeof content !== 'undefined' ? content['brand.logo'] : '/images/aghaz-mark.png' %>" alt="<%= typeof content !== 'undefined' ? content['brand.namePrimary'] + ' ' + content['brand.nameAccent'] : 'Aghaz Tech' %>" width="36" height="36"
              class="shrink-0 w-9 h-9 object-contain">
         <span class="flex flex-col leading-none">
           <span class="text-lg font-bold font-display tracking-tight">
-            <span class="text-white">Aghaz</span> <span class="text-brand">Digital</span>
+            <span class="text-white"><%= typeof content !== 'undefined' ? content['brand.namePrimary'] : 'Aghaz' %></span> <span class="text-brand"><%= typeof content !== 'undefined' ? content['brand.nameAccent'] : 'Tech' %></span>
           </span>
-          <span class="text-[9px] tracking-[0.22em] text-gray-500 uppercase font-display font-medium mt-0.5">Start. Grow. Succeed.</span>
+          <span class="text-[9px] tracking-[0.22em] text-gray-500 uppercase font-display font-medium mt-0.5"><%= typeof content !== 'undefined' ? content['brand.tagline'] : 'Start. Grow. Succeed.' %></span>
         </span>
       </a>
 
@@ -43,25 +43,17 @@
         <a href="/blog" class="px-3 py-2 text-sm text-gray-300 hover:text-white rounded-lg hover:bg-white/5 transition">Blog</a>
       </div>
 
-      <div class="hidden lg:flex items-center gap-2">
-        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle light and dark mode">
-          <i class="fas fa-sun"></i>
-        </button>
+      <div class="hidden lg:flex items-center">
         <a href="/contact" class="primary-btn !px-4 !py-2 !text-sm">
           Request a Consultation <i class="fas fa-arrow-right text-xs"></i>
         </a>
       </div>
 
-      <div class="lg:hidden flex items-center gap-2">
-        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle light and dark mode">
-          <i class="fas fa-sun"></i>
-        </button>
-        <button id="navToggle" type="button"
-                class="grid place-items-center w-10 h-10 rounded-lg border border-white/10 bg-white/5"
-                aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobileMenu">
-          <i class="fas fa-bars" id="navToggleIcon"></i>
-        </button>
-      </div>
+      <button id="navToggle" type="button"
+              class="lg:hidden grid place-items-center w-10 h-10 rounded-lg border border-white/10 bg-white/5"
+              aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobileMenu">
+        <i class="fas fa-bars" id="navToggleIcon"></i>
+      </button>
     </div>
   </div>
 

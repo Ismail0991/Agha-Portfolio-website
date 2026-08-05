@@ -1,21 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<!-- Theme is a single global setting the admin controls (res.locals.siteTheme); rendered
+     server-side so there is no flash and visitors cannot change it. -->
+<html lang="en" class="scroll-smooth" data-theme="<%= typeof siteTheme !== 'undefined' ? siteTheme : 'dark' %>">
 <head>
-  <!-- Set the saved theme before first paint to avoid a flash of the wrong colours. -->
-  <script>
-    (function () {
-      try {
-        var t = localStorage.getItem("theme");
-        document.documentElement.setAttribute("data-theme", t === "light" ? "light" : "dark");
-      } catch (e) {
-        document.documentElement.setAttribute("data-theme", "dark");
-      }
-    })();
-  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= typeof title !== "undefined" ? title : "Aghaz Digital | Marketing, AI, Software & Branding Agency" %></title>
-  <meta name="description" content="<%= typeof description !== 'undefined' ? description : 'Aghaz Digital builds the marketing, brand, AI, and software a growing business actually needs — one accountable team, scoped around your goals, not a template.' %>">
+  <title><%= typeof title !== "undefined" ? title : "Aghaz Tech | Marketing, AI, Software & Branding Agency" %></title>
+  <meta name="description" content="<%= typeof description !== 'undefined' ? description : 'Aghaz Tech builds the marketing, brand, AI, and software a growing business actually needs — one accountable team, scoped around your goals, not a template.' %>">
   <link rel="icon" type="image/png" href="/images/favicon.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +15,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <script>
-    // Aghaz Digital brand palette: teal #14B8A6 / deep teal #0F766E / blue #3B82F6.
+    // Aghaz Tech brand palette: teal #14B8A6 / deep teal #0F766E / blue #3B82F6.
     tailwind.config = {
       theme: {
         extend: {
@@ -248,27 +239,7 @@
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    // ----- Theme toggle -----
-    (() => {
-      const root = document.documentElement;
-      const syncIcons = (t) => {
-        document.querySelectorAll("[data-theme-toggle] i").forEach((ic) => {
-          ic.className = t === "light" ? "fas fa-moon" : "fas fa-sun";
-        });
-      };
-      const apply = (t) => {
-        root.setAttribute("data-theme", t);
-        try { localStorage.setItem("theme", t); } catch (e) {}
-        syncIcons(t);
-        if (window.AOS) AOS.refresh();
-      };
-      syncIcons(root.getAttribute("data-theme"));
-      document.querySelectorAll("[data-theme-toggle]").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          apply(root.getAttribute("data-theme") === "light" ? "dark" : "light");
-        });
-      });
-    })();
+    // Theme is set server-side from the admin's global choice; there is no visitor toggle.
 
     // ----- AOS scroll animations (replay on scroll), with a fail-safe -----
     (() => {
@@ -321,7 +292,11 @@
           if (!entry.isIntersecting) return;
           const el = entry.target;
           io.unobserve(el);
-          const target = parseInt(el.dataset.count, 10);
+          const raw = el.dataset.count || "";
+          // Stat values are admin-editable, so they may be non-numeric ("150+", "5 yrs").
+          // Only count up when it is a plain whole number; otherwise show the text as-is.
+          if (!/^\d+$/.test(raw.trim())) { el.textContent = raw; return; }
+          const target = parseInt(raw, 10);
           const suffix = el.dataset.suffix || "";
           if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { el.textContent = target + suffix; return; }
           const start = performance.now();

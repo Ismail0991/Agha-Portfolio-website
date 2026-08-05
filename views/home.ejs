@@ -139,9 +139,9 @@
   [data-aos="atilt-r"], [data-aos="atilt-d"], [data-aos="atilt-l"] {
     opacity: 0; transition-property: transform, opacity;
   }
-  [data-aos="atilt-r"] { transform: translateX(-45px) rotate(-30deg); }
-  [data-aos="atilt-d"] { transform: translateY(-45px) rotate(30deg); }
-  [data-aos="atilt-l"] { transform: translateX(45px) rotate(-30deg); }
+  [data-aos="atilt-r"] { transform: translateX(-15px) rotate(-30deg); }
+  [data-aos="atilt-d"] { transform: translateY(-15px) rotate(30deg); }
+  [data-aos="atilt-l"] { transform: translateX(15px) rotate(-30deg); }
   [data-aos="atilt-r"].aos-animate,
   [data-aos="atilt-d"].aos-animate,
   [data-aos="atilt-l"].aos-animate { opacity: 1; transform: translate(0, 0) rotate(0); }
@@ -167,40 +167,39 @@
       <div class="lg:col-span-7 order-2 lg:order-1">
         <div class="eyebrow mb-6" data-aos="fade-down" data-aos-duration="650">
           <span class="w-1.5 h-1.5 rounded-full bg-brand animate-pulse"></span>
-          Your Venture Begins Here
+          <%= content['hero.eyebrow'] %>
         </div>
 
         <h1 class="text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold leading-[1.1] mb-3" data-aos="fade-up" data-aos-duration="750">
-          Technology and marketing that <span class="gradient-text">fit your business</span>, not the other way around.
+          <%= content['hero.titlePre'] %> <span class="gradient-text"><%= content['hero.titleHighlight'] %></span><%= content['hero.titlePost'] %>
         </h1>
         <span class="title-underline mb-6"></span>
 
         <p class="text-lg text-gray-400 leading-relaxed max-w-xl mb-9 mt-6" data-aos="fade-up" data-aos-delay="100" data-aos-duration="650">
-          Aghaz Digital builds the marketing, brand, AI, and software a growing business
-          actually needs — scoped around your goals, not a template.
+          <%= content['hero.desc'] %>
         </p>
 
         <div class="flex flex-wrap gap-3 mb-14" data-aos="fade-up" data-aos-delay="200" data-aos-duration="650">
-          <a href="/contact" class="primary-btn">
-            Request a Consultation <i class="fas fa-arrow-right text-xs"></i>
+          <a href="<%= content['hero.primaryLink'] %>" class="primary-btn">
+            <%= content['hero.primaryLabel'] %> <i class="fas fa-arrow-right text-xs"></i>
           </a>
-          <a href="/services" class="ghost-btn">
-            <i class="fas fa-layer-group text-xs"></i> See Our Services
+          <a href="<%= content['hero.secondaryLink'] %>" class="ghost-btn">
+            <i class="fas fa-layer-group text-xs"></i> <%= content['hero.secondaryLabel'] %>
           </a>
         </div>
 
         <div class="grid grid-cols-3 gap-6 max-w-lg" data-aos="fade-up" data-aos-delay="300" data-aos-duration="650">
           <div>
-            <h3 class="text-3xl font-bold text-brand font-display" data-count="7">0</h3>
-            <p class="text-sm text-gray-500 mt-1">Connected Services</p>
+            <h3 class="text-3xl font-bold text-brand font-display" data-count="<%= content['hero.stat1Value'] %>">0</h3>
+            <p class="text-sm text-gray-500 mt-1"><%= content['hero.stat1Label'] %></p>
           </div>
           <div class="border-x border-white/10 px-6">
-            <h3 class="text-3xl font-bold text-brand font-display" data-count="1">0</h3>
-            <p class="text-sm text-gray-500 mt-1">Accountable Team</p>
+            <h3 class="text-3xl font-bold text-brand font-display" data-count="<%= content['hero.stat2Value'] %>">0</h3>
+            <p class="text-sm text-gray-500 mt-1"><%= content['hero.stat2Label'] %></p>
           </div>
           <div>
-            <h3 class="text-3xl font-bold text-brand font-display" data-count="6">0</h3>
-            <p class="text-sm text-gray-500 mt-1">Industries Served</p>
+            <h3 class="text-3xl font-bold text-brand font-display" data-count="<%= content['hero.stat3Value'] %>">0</h3>
+            <p class="text-sm text-gray-500 mt-1"><%= content['hero.stat3Label'] %></p>
           </div>
         </div>
       </div>
@@ -212,8 +211,8 @@
           <div class="hv-orbit o1"></div>
           <div class="hv-orbit o2"></div>
           <div class="hv-center">
-            <img src="/images/aghaz-mark.png" alt="Aghaz Digital">
-            <div class="hv-wordmark">Aghaz <span>Digital</span></div>
+            <img src="<%= content['brand.logo'] %>" alt="<%= content['brand.namePrimary'] %> <%= content['brand.nameAccent'] %>">
+            <div class="hv-wordmark"><%= content['brand.namePrimary'] %> <span><%= content['brand.nameAccent'] %></span></div>
             <div class="hv-tag">START · GROW · SUCCEED</div>
           </div>
           <div class="float-ic fi-1"><i class="fab fa-react"></i></div>
@@ -243,7 +242,7 @@
       <!-- 3-image collage: each image reveals from a different direction, staggered. -->
       <div class="about-gallery">
         <div class="g-img g1" data-aos="atilt-r" data-aos-delay="0" data-aos-duration="700">
-          <img src="<%= siteImages['about.story'] %>" alt="The Aghaz Digital team at work" loading="lazy">
+          <img src="<%= siteImages['about.story'] %>" alt="The Aghaz Tech team at work" loading="lazy">
         </div>
         <div class="g-img g2" data-aos="atilt-d" data-aos-delay="150" data-aos-duration="700">
           <img src="<%= siteImages['about.culture'] %>" alt="Collaborating on a project" loading="lazy">
@@ -253,49 +252,47 @@
         </div>
         <div class="about-badge" data-aos="zoom-in" data-aos-delay="450" data-aos-duration="600">
           <span class="service-icon !w-9 !h-9 !text-base"><i class="fas fa-people-group"></i></span>
-          <span class="text-sm font-semibold">One team. Every service.</span>
+          <span class="text-sm font-semibold"><%= content['about.badge'] %></span>
         </div>
       </div>
 
       <!-- Content column reveals one element after another. -->
       <div>
-        <div class="eyebrow mb-4" data-aos="fade-down" data-aos-delay="100" data-aos-duration="600">About Aghaz Digital</div>
+        <div class="eyebrow mb-4" data-aos="fade-down" data-aos-delay="100" data-aos-duration="600"><%= content['about.eyebrow'] %></div>
         <h2 class="text-3xl sm:text-4xl font-bold mb-5" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="700">
-          The team businesses <span class="gradient-text">wish they'd hired first</span>
+          <%= content['about.titlePre'] %> <span class="gradient-text"><%= content['about.titleHighlight'] %></span>
         </h2>
         <p class="text-gray-400 leading-relaxed mb-8" data-aos="fade-up" data-aos-delay="500" data-aos-duration="600">
-          Aghaz Digital exists because businesses were tired of hiring separate vendors for
-          marketing, branding, and technology that never quite talked to each other. We bring
-          all of it under one team — so every piece of your growth strategy works from the same plan.
+          <%= content['about.desc'] %>
         </p>
 
         <div class="space-y-5 mb-9">
           <div class="flex gap-4" data-aos="fade-left" data-aos-delay="700" data-aos-duration="600">
-            <span class="service-icon shrink-0"><i class="fas fa-magnifying-glass"></i></span>
+            <span class="service-icon shrink-0"><i class="fas <%= content['about.feat1Icon'] %>"></i></span>
             <div>
-              <h4 class="font-semibold mb-1">Audit before advice</h4>
-              <p class="text-sm text-gray-400 leading-relaxed">Every engagement starts with understanding your business — not a sales pitch.</p>
+              <h4 class="font-semibold mb-1"><%= content['about.feat1Title'] %></h4>
+              <p class="text-sm text-gray-400 leading-relaxed"><%= content['about.feat1Text'] %></p>
             </div>
           </div>
           <div class="flex gap-4" data-aos="fade-left" data-aos-delay="850" data-aos-duration="600">
-            <span class="service-icon shrink-0"><i class="fas fa-users-gear"></i></span>
+            <span class="service-icon shrink-0"><i class="fas <%= content['about.feat2Icon'] %>"></i></span>
             <div>
-              <h4 class="font-semibold mb-1">Senior people, no handoffs</h4>
-              <p class="text-sm text-gray-400 leading-relaxed">The people who scope your project are the ones who build it.</p>
+              <h4 class="font-semibold mb-1"><%= content['about.feat2Title'] %></h4>
+              <p class="text-sm text-gray-400 leading-relaxed"><%= content['about.feat2Text'] %></p>
             </div>
           </div>
           <div class="flex gap-4" data-aos="fade-left" data-aos-delay="1000" data-aos-duration="600">
-            <span class="service-icon shrink-0"><i class="fas fa-seedling"></i></span>
+            <span class="service-icon shrink-0"><i class="fas <%= content['about.feat3Icon'] %>"></i></span>
             <div>
-              <h4 class="font-semibold mb-1">Built for the long term</h4>
-              <p class="text-sm text-gray-400 leading-relaxed">Most clients start with one service and expand as they see results.</p>
+              <h4 class="font-semibold mb-1"><%= content['about.feat3Title'] %></h4>
+              <p class="text-sm text-gray-400 leading-relaxed"><%= content['about.feat3Text'] %></p>
             </div>
           </div>
         </div>
 
         <div class="flex flex-wrap gap-3" data-aos="zoom-in" data-aos-delay="1200" data-aos-duration="600">
-          <a href="/about" class="primary-btn">Learn Our Story <i class="fas fa-arrow-right text-xs"></i></a>
-          <a href="/team" class="ghost-btn"><i class="fas fa-users text-xs"></i> Meet the Team</a>
+          <a href="<%= content['about.primaryLink'] %>" class="primary-btn"><%= content['about.primaryLabel'] %> <i class="fas fa-arrow-right text-xs"></i></a>
+          <a href="<%= content['about.secondaryLink'] %>" class="ghost-btn"><i class="fas fa-users text-xs"></i> <%= content['about.secondaryLabel'] %></a>
         </div>
       </div>
     </div>
@@ -308,9 +305,9 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
       <!-- Left column: each element reveals one after another via staggered AOS delays. -->
       <div>
-        <div class="eyebrow mb-4" data-aos="fade-right" data-aos-delay="0" data-aos-duration="650">Why Businesses Choose Aghaz Digital</div>
+        <div class="eyebrow mb-4" data-aos="fade-right" data-aos-delay="0" data-aos-duration="650"><%= content['why.eyebrow'] %></div>
         <h2 class="text-3xl sm:text-4xl font-bold mb-5" data-aos="fade-right" data-aos-delay="100" data-aos-duration="750">
-          One team, <span class="gradient-text">not five vendors</span>
+          <%= content['why.titlePre'] %> <span class="gradient-text"><%= content['why.titleHighlight'] %></span>
         </h2>
         <p class="text-gray-400 leading-relaxed mb-6" data-aos="fade-right" data-aos-delay="200" data-aos-duration="650">
           Most companies end up stitching together five vendors — one for marketing, one for
@@ -378,78 +375,77 @@
 <section class="py-24">
   <div class="max-w-7xl mx-auto px-4">
     <div class="max-w-2xl mb-14">
-      <div class="eyebrow mb-4" data-aos="fade-down" data-aos-delay="0" data-aos-duration="650">What We Do</div>
+      <div class="eyebrow mb-4" data-aos="fade-down" data-aos-delay="0" data-aos-duration="650"><%= content['services.eyebrow'] %></div>
       <h2 class="text-3xl sm:text-4xl font-bold mb-4" data-aos="fade-right" data-aos-delay="100" data-aos-duration="750">
-        Seven connected services, <span class="gradient-text">one team</span>
+        <%= content['services.titlePre'] %> <span class="gradient-text"><%= content['services.titleHighlight'] %></span>
       </h2>
       <p class="text-gray-400 leading-relaxed" data-aos="fade-up" data-aos-delay="200" data-aos-duration="650">
-        Get found. Get remembered. Run more efficiently. Use one service or all seven —
-        every engagement is scoped to what your business actually needs.
+        <%= content['services.desc'] %>
       </p>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <div class="glass p-7 svc-tilt" data-aos="zoom-in-up" data-aos-delay="0" data-aos-duration="650">
-        <div class="service-icon mb-5"><i class="fas fa-bullhorn"></i></div>
-        <h3 class="text-lg font-bold mb-2.5">Digital Marketing</h3>
+        <div class="service-icon mb-5"><i class="fas <%= content['svc1.icon'] %>"></i></div>
+        <h3 class="text-lg font-bold mb-2.5"><%= content['svc1.title'] %></h3>
         <p class="text-sm text-gray-400 leading-relaxed mb-5">
-          Lead generation, content, and performance campaigns built on clear positioning, not content volume.
+          <%= content['svc1.text'] %>
         </p>
-        <a href="/services/digital-marketing" class="text-sm text-brand font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all">Learn More <i class="fas fa-arrow-right text-xs"></i></a>
+        <a href="<%= content['svc1.link'] %>" class="text-sm text-brand font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all">Learn More <i class="fas fa-arrow-right text-xs"></i></a>
       </div>
 
       <div class="glass p-7 svc-tilt" data-aos="zoom-in-up" data-aos-delay="80" data-aos-duration="650">
-        <div class="service-icon mb-5"><i class="fas fa-magnifying-glass-chart"></i></div>
-        <h3 class="text-lg font-bold mb-2.5">SEO Services</h3>
+        <div class="service-icon mb-5"><i class="fas <%= content['svc2.icon'] %>"></i></div>
+        <h3 class="text-lg font-bold mb-2.5"><%= content['svc2.title'] %></h3>
         <p class="text-sm text-gray-400 leading-relaxed mb-5">
-          Technical audits, on-page optimization, and content strategy that build visibility that compounds.
+          <%= content['svc2.text'] %>
         </p>
-        <a href="/services/seo-services" class="text-sm text-brand font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all">Learn More <i class="fas fa-arrow-right text-xs"></i></a>
+        <a href="<%= content['svc2.link'] %>" class="text-sm text-brand font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all">Learn More <i class="fas fa-arrow-right text-xs"></i></a>
       </div>
 
       <div class="glass p-7 svc-tilt" data-aos="zoom-in-up" data-aos-delay="160" data-aos-duration="650">
-        <div class="service-icon mb-5"><i class="fas fa-fingerprint"></i></div>
-        <h3 class="text-lg font-bold mb-2.5">Branding</h3>
+        <div class="service-icon mb-5"><i class="fas <%= content['svc3.icon'] %>"></i></div>
+        <h3 class="text-lg font-bold mb-2.5"><%= content['svc3.title'] %></h3>
         <p class="text-sm text-gray-400 leading-relaxed mb-5">
-          Brand strategy, messaging, and visual identity that make you memorable instead of interchangeable.
+          <%= content['svc3.text'] %>
         </p>
-        <a href="/services/branding" class="text-sm text-brand font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all">Learn More <i class="fas fa-arrow-right text-xs"></i></a>
+        <a href="<%= content['svc3.link'] %>" class="text-sm text-brand font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all">Learn More <i class="fas fa-arrow-right text-xs"></i></a>
       </div>
 
       <div class="glass p-7 svc-tilt" data-aos="zoom-in-up" data-aos-delay="0" data-aos-duration="650">
-        <div class="service-icon mb-5"><i class="fas fa-robot"></i></div>
-        <h3 class="text-lg font-bold mb-2.5">AI Solutions</h3>
+        <div class="service-icon mb-5"><i class="fas <%= content['svc4.icon'] %>"></i></div>
+        <h3 class="text-lg font-bold mb-2.5"><%= content['svc4.title'] %></h3>
         <p class="text-sm text-gray-400 leading-relaxed mb-5">
-          Practical automation and AI tools built around your real bottlenecks, inside the systems you already use.
+          <%= content['svc4.text'] %>
         </p>
-        <a href="/services/ai-solutions" class="text-sm text-brand font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all">Learn More <i class="fas fa-arrow-right text-xs"></i></a>
+        <a href="<%= content['svc4.link'] %>" class="text-sm text-brand font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all">Learn More <i class="fas fa-arrow-right text-xs"></i></a>
       </div>
 
       <div class="glass p-7 svc-tilt" data-aos="zoom-in-up" data-aos-delay="80" data-aos-duration="650">
-        <div class="service-icon mb-5"><i class="fas fa-code"></i></div>
-        <h3 class="text-lg font-bold mb-2.5">Software Development</h3>
+        <div class="service-icon mb-5"><i class="fas <%= content['svc5.icon'] %>"></i></div>
+        <h3 class="text-lg font-bold mb-2.5"><%= content['svc5.title'] %></h3>
         <p class="text-sm text-gray-400 leading-relaxed mb-5">
-          Custom internal tools, customer platforms, and SaaS products built around your specific workflow.
+          <%= content['svc5.text'] %>
         </p>
-        <a href="/services/software-development" class="text-sm text-brand font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all">Learn More <i class="fas fa-arrow-right text-xs"></i></a>
+        <a href="<%= content['svc5.link'] %>" class="text-sm text-brand font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all">Learn More <i class="fas fa-arrow-right text-xs"></i></a>
       </div>
 
       <div class="glass p-7 svc-tilt" data-aos="zoom-in-up" data-aos-delay="160" data-aos-duration="650">
-        <div class="service-icon mb-5"><i class="fas fa-display"></i></div>
-        <h3 class="text-lg font-bold mb-2.5">Web Development</h3>
+        <div class="service-icon mb-5"><i class="fas <%= content['svc6.icon'] %>"></i></div>
+        <h3 class="text-lg font-bold mb-2.5"><%= content['svc6.title'] %></h3>
         <p class="text-sm text-gray-400 leading-relaxed mb-5">
-          Websites and web applications built to convert, load fast, and scale with your business.
+          <%= content['svc6.text'] %>
         </p>
-        <a href="/services/web-development" class="text-sm text-brand font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all">Learn More <i class="fas fa-arrow-right text-xs"></i></a>
+        <a href="<%= content['svc6.link'] %>" class="text-sm text-brand font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all">Learn More <i class="fas fa-arrow-right text-xs"></i></a>
       </div>
 
       <div class="glass p-7 svc-tilt sm:col-span-2 lg:col-span-1" data-aos="zoom-in-up" data-aos-duration="650">
-        <div class="service-icon mb-5"><i class="fas fa-arrows-spin"></i></div>
-        <h3 class="text-lg font-bold mb-2.5">Digital Transformation</h3>
+        <div class="service-icon mb-5"><i class="fas <%= content['svc7.icon'] %>"></i></div>
+        <h3 class="text-lg font-bold mb-2.5"><%= content['svc7.title'] %></h3>
         <p class="text-sm text-gray-400 leading-relaxed mb-5">
-          Audits and roadmaps for businesses ready to replace manual processes with real systems.
+          <%= content['svc7.text'] %>
         </p>
-        <a href="/services/digital-transformation" class="text-sm text-brand font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all">Learn More <i class="fas fa-arrow-right text-xs"></i></a>
+        <a href="<%= content['svc7.link'] %>" class="text-sm text-brand font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all">Learn More <i class="fas fa-arrow-right text-xs"></i></a>
       </div>
 
       <div class="glass p-7 sm:col-span-2 lg:col-span-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 bg-brand/[0.06]" data-aos="zoom-in-up" data-aos-delay="80" data-aos-duration="650">
@@ -467,9 +463,9 @@
 <section class="py-24 border-y border-white/10 bg-white/[0.02]">
   <div class="max-w-7xl mx-auto px-4">
     <div class="max-w-2xl mx-auto text-center mb-16">
-      <div class="eyebrow mb-4" data-aos="fade-down" data-aos-delay="0" data-aos-duration="650">Our Process</div>
+      <div class="eyebrow mb-4" data-aos="fade-down" data-aos-delay="0" data-aos-duration="650"><%= content['process.eyebrow'] %></div>
       <h2 class="text-3xl sm:text-4xl font-bold mb-4" data-aos="zoom-in-up" data-aos-delay="100" data-aos-duration="750">
-        We understand your business <span class="gradient-text">before we recommend anything</span>
+        <%= content['process.titlePre'] %> <span class="gradient-text"><%= content['process.titleHighlight'] %></span>
       </h2>
       <p class="text-gray-400 leading-relaxed" data-aos="fade-up" data-aos-delay="200" data-aos-duration="650">
         Every engagement starts with understanding what's actually happening — not a sales pitch for our services.
@@ -509,9 +505,9 @@
 <section class="py-24">
   <div class="max-w-7xl mx-auto px-4">
     <div class="max-w-2xl mb-14">
-      <div class="eyebrow mb-4" data-aos="fade-right" data-aos-delay="0" data-aos-duration="650">Industries We Serve</div>
+      <div class="eyebrow mb-4" data-aos="fade-right" data-aos-delay="0" data-aos-duration="650"><%= content['industries.eyebrow'] %></div>
       <h2 class="text-3xl sm:text-4xl font-bold mb-4" data-aos="fade-right" data-aos-delay="100" data-aos-duration="750">
-        Built for how <span class="gradient-text">your industry</span> actually operates
+        <%= content['industries.titlePre'] %> <span class="gradient-text"><%= content['industries.titleHighlight'] %></span> <%= content['industries.titlePost'] %>
       </h2>
       <p class="text-gray-400 leading-relaxed" data-aos="fade-right" data-aos-delay="200" data-aos-duration="650">
         A logistics company doesn't run like a SaaS business. We build around the specific
@@ -534,13 +530,12 @@
 <section class="py-24 border-t border-white/10">
   <div class="max-w-7xl mx-auto px-4">
     <div class="max-w-2xl mx-auto text-center mb-14">
-      <div class="eyebrow mb-4" data-aos="fade-down" data-aos-delay="100" data-aos-duration="600">Meet the Team</div>
+      <div class="eyebrow mb-4" data-aos="fade-down" data-aos-delay="100" data-aos-duration="600"><%= content['team.eyebrow'] %></div>
       <h2 class="text-3xl sm:text-4xl font-bold mb-4" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="700">
-        The people <span class="gradient-text">behind Aghaz Digital</span>
+        <%= content['team.titlePre'] %> <span class="gradient-text"><%= content['team.titleHighlight'] %></span>
       </h2>
       <p class="text-gray-400 leading-relaxed" data-aos="fade-up" data-aos-delay="500" data-aos-duration="600">
-        Senior builders, designers, and strategists who own real outcomes — the people who
-        scope your project are the ones who build it.
+        <%= content['team.desc'] %>
       </p>
     </div>
 
@@ -625,9 +620,9 @@
   <div class="max-w-7xl mx-auto px-4">
     <div class="flex flex-wrap justify-between items-end gap-4 mb-14">
       <div class="max-w-xl">
-        <div class="eyebrow mb-4" data-aos="fade-right" data-aos-delay="0" data-aos-duration="650">Insights</div>
+        <div class="eyebrow mb-4" data-aos="fade-right" data-aos-delay="0" data-aos-duration="650"><%= content['blog.eyebrow'] %></div>
         <h2 class="text-3xl sm:text-4xl font-bold mb-3" data-aos="fade-right" data-aos-delay="100" data-aos-duration="750">
-          Practical insight, <span class="gradient-text">not filler content</span>
+          <%= content['blog.titlePre'] %> <span class="gradient-text"><%= content['blog.titleHighlight'] %></span>
         </h2>
         <p class="text-gray-400" data-aos="fade-right" data-aos-delay="200" data-aos-duration="650">Straightforward guides for people running a business, not other marketers.</p>
       </div>
@@ -648,16 +643,16 @@
 <section class="py-24">
   <div class="max-w-3xl mx-auto px-4">
     <div class="text-center mb-14">
-      <div class="eyebrow mb-4" data-aos="fade-down" data-aos-delay="0" data-aos-duration="650">FAQ</div>
+      <div class="eyebrow mb-4" data-aos="fade-down" data-aos-delay="0" data-aos-duration="650"><%= content['faq.eyebrow'] %></div>
       <h2 class="text-3xl sm:text-4xl font-bold" data-aos="zoom-in-up" data-aos-delay="100" data-aos-duration="750">
-        Questions, <span class="gradient-text">answered</span>
+        <%= content['faq.titlePre'] %> <span class="gradient-text"><%= content['faq.titleHighlight'] %></span>
       </h2>
     </div>
 
     <div class="space-y-3">
       <details class="glass p-6 group" data-aos="fade-right" data-aos-delay="0" data-aos-duration="650">
         <summary class="flex justify-between items-center cursor-pointer font-semibold list-none">
-          What services does Aghaz Digital offer?
+          What services does Aghaz Tech offer?
           <i class="fas fa-plus text-brand text-sm transition-transform group-open:rotate-45"></i>
         </summary>
         <p class="text-sm text-gray-400 leading-relaxed mt-4">
@@ -700,17 +695,16 @@
 
       <div class="relative">
         <h2 class="text-3xl sm:text-5xl font-bold mb-5" data-aos="fade-up" data-aos-delay="100" data-aos-duration="750">
-          Tell us what's holding your <span class="gradient-text">business back</span>
+          <%= content['cta.titlePre'] %> <span class="gradient-text"><%= content['cta.titleHighlight'] %></span>
         </h2>
         <p class="text-gray-400 max-w-xl mx-auto mb-10 leading-relaxed" data-aos="fade-up" data-aos-delay="200" data-aos-duration="650">
-          We'll tell you what fixes it first. Every engagement starts with a conversation,
-          not a sales pitch — and the first call is free.
+          <%= content['cta.desc'] %>
         </p>
         <div class="flex flex-wrap justify-center gap-3" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="650">
-          <a href="/contact" class="primary-btn">
-            Request a Consultation <i class="fas fa-arrow-right text-xs"></i>
+          <a href="<%= content['cta.primaryLink'] %>" class="primary-btn">
+            <%= content['cta.primaryLabel'] %> <i class="fas fa-arrow-right text-xs"></i>
           </a>
-          <a href="/services" class="ghost-btn">See Our Services</a>
+          <a href="<%= content['cta.secondaryLink'] %>" class="ghost-btn"><%= content['cta.secondaryLabel'] %></a>
         </div>
 
         <div class="flex flex-wrap justify-center gap-x-8 gap-y-3 mt-12 text-sm text-gray-500" data-aos="fade-up" data-aos-delay="400" data-aos-duration="650">

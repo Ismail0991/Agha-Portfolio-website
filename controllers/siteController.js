@@ -1,5 +1,54 @@
 const SiteImage = require("../models/SiteImage");
+const SiteContent = require("../models/SiteContent");
 const { invalidateSiteImagesCache } = require("../middleware/siteImages");
+const { invalidateContentCache } = require("../middleware/siteContent");
+const { readTheme, setTheme } = require("../middleware/siteTheme");
+
+// Admin: grouped editable landing-page fields (label, type, current value, default).
+exports.getContentDetailed = async (req, res) => {
+  try {
+    res.json(await SiteContent.findGrouped());
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Admin: save many { key: value }. Blank value resets that field to its default.
+exports.updateContent = async (req, res) => {
+  const values = req.body && req.body.values;
+  if (!values || typeof values !== "object") {
+    return res.status(400).json({ message: "Expected a 'values' object of { key: value }" });
+  }
+  try {
+    const count = await SiteContent.saveMany(values);
+    invalidateContentCache();
+    res.json({ message: "Saved", updated: count });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Public: current global theme (dark|light).
+exports.getTheme = async (req, res) => {
+  try {
+    res.json({ theme: await readTheme() });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Admin only: set the global theme for the whole site.
+exports.updateTheme = async (req, res) => {
+  const { theme } = req.body;
+  if (theme !== "light" && theme !== "dark") {
+    return res.status(400).json({ message: "theme must be 'light' or 'dark'" });
+  }
+  try {
+    res.json({ theme: await setTheme(theme) });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 // Public: the pages fetch this to render their images.
 exports.getImages = async (req, res) => {
